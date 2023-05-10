@@ -1,0 +1,16 @@
+; #pdb    at(A)        ch(A)       at(B)       ch(B)    dummy  1/2
+; GLY 164
+2539     opls_224B     0.140      opls_224B    0.140             2  ; CA
+2541     opls_136     -0.120      opls_136    -0.120             2  ; CB
+2542     opls_140      0.060      opls_140     0.060             2  ; HB1
+2543     opls_140      0.060      opls_140     0.060             2  ; HB2
+2544     opls_274     -0.220      opls_136    -0.120    glu_d8   1  ; CG
+2545     opls_140      0.060      opls_140     0.060    glu_d9   1  ; HG1
+2546     opls_140      0.060      opls_140     0.060    glu_d10  1  ; HG2
+2547     opls_271      0.700      opls_267     0.520    glu_d11  1  ; CD
+2548     opls_272     -0.800      opls_269    -0.440    glu_d12  1  ; OE1
+2549     opls_272     -0.800      opls_268    -0.530    glu_d13  1  ; OE2  !!!
+
+7557     sub_H15       0.06       opls_270     0.450    sub_d15  1  ; H15  !!!
+
+

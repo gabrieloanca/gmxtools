@@ -1,0 +1,60 @@
+51                     ! Number of energy files
+2 0                    ! Number of states, number of predefined off-diagonal elements (from .fep-file, 0 means redefine)
+0.596 100              ! kT, number of points to skip in each energy file
+50                     ! Number of gap bins
+10                     ! Minimum number of points per bin
+91.52                  ! Energy shift ∆αij (for states6 =1)
+1                      ! Number of off-diagonal elements 6 =0
+1 2 172.70 0.0 0.0 0.0 ! i, j, Aij , μij , ηij , r0ij
+1 -1                   ! Linear combination of states defining the reaction coordinate (ε1 − ε2).
+fep_000.dat
+fep_001.dat
+fep_002.dat
+fep_003.dat
+fep_004.dat
+fep_005.dat
+fep_006.dat
+fep_007.dat
+fep_008.dat
+fep_009.dat
+fep_010.dat
+fep_011.dat
+fep_012.dat
+fep_013.dat
+fep_014.dat
+fep_015.dat
+fep_016.dat
+fep_017.dat
+fep_018.dat
+fep_019.dat
+fep_020.dat
+fep_021.dat
+fep_022.dat
+fep_023.dat
+fep_024.dat
+fep_025.dat
+fep_026.dat
+fep_027.dat
+fep_028.dat
+fep_029.dat
+fep_030.dat
+fep_031.dat
+fep_032.dat
+fep_033.dat
+fep_034.dat
+fep_035.dat
+fep_036.dat
+fep_037.dat
+fep_038.dat
+fep_039.dat
+fep_040.dat
+fep_041.dat
+fep_042.dat
+fep_043.dat
+fep_044.dat
+fep_045.dat
+fep_046.dat
+fep_047.dat
+fep_048.dat
+fep_049.dat
+fep_050.dat

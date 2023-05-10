@@ -1,0 +1,14 @@
+; In this topology include file, you will find position restraint
+; entries for all the heavy atoms in your original pdb file.
+; This means that all the protons which were added by pdb2gmx are
+; not restrained.
+
+[ position_restraints ]
+; atom  type      fx      fy      fz
+     1     1  8368.00  8368.00  8368.00
+     2     1  8368.00  8368.00  8368.00
+     3     1  8368.00  8368.00  8368.00
+     4     1  8368.00  8368.00  8368.00
+     5     1  8368.00  8368.00  8368.00
+     6     1  8368.00  8368.00  8368.00
+

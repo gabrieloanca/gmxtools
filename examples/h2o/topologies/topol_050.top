@@ -1,0 +1,158 @@
+; Topology for EVB simulation in Gromacs, generated with gmx4evb.py
+; User: struggle
+; Date: 2023-5-10 11:51:52
+; For download and updates, vizit or clone:
+;     https://github.com/gabrieloanca/gromacs-evb
+;     git@github.com:gabrieloanca/gromacs-evb
+; For suggestions, reporting buggs or for any assistance write to oanca.gabriel@gmail.com
+; ---------------------------------------------------------------------------------------
+;
+;	File 'topol.top' was generated
+;	By user: goanca (51179)
+;	On host: csb.bmc.uu.se
+;	At date: Fri Nov 18 12:54:39 2022
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                     :-) GROMACS - gmx pdb2gmx, 2021 (-:
+;	
+;	Executable:   /home/apps/apps/.spack/sandybridge/gcc-10.2.0/gromacs-2021-lx52hldze4odq56frfkrf4vdhifqb7do/bin/gmx
+;	Data prefix:  /home/apps/apps/.spack/sandybridge/gcc-10.2.0/gromacs-2021-lx52hldze4odq56frfkrf4vdhifqb7do
+;	Working dir:  /home/goanca/h2o_sqrt/maketop
+;	Command line:
+;	  gmx pdb2gmx -f h2o.pdb -o h2o-start.pdb -water tip3p
+;	Force field was read from current directory or a relative path - path added.
+;
+
+; Include forcefield parameters
+#include "./h2o_evb.ff/forcefield.itp"
+
+[ moleculetype ]
+; Name            nrexcl
+Other               3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+; residue   1 H2O rtp H2O  q  0.0
+      1    h2o_O1      1     H2O     O      1  -0.815258    15.9994   ho-_O1  -1.205613    15.9994   
+      2    h2o_H2      1     H2O    H1      1   0.407629      1.008   ho-_H2   0.205613      1.008   
+      3    h2o_H3      1     H2O    H2      1   0.407629      1.008  h3o+_H4   0.542043      1.008   ; qtot 0
+; residue   2 H2O rtp H2O  q  0.0
+      4    h2o_O1      2     H2O     O      2  -0.815258    15.9994  h3o+_O1  -0.626129    15.9994   
+      5    h2o_H2      2     H2O    H1      2   0.407629      1.008  h3o+_H2   0.542043      1.008   
+      6    h2o_H3      2     H2O    H2      2   0.407629      1.008  h3o+_H3   0.542043      1.008   ; qtot 0
+
+[ bonds ]
+;  ai    aj funct            c0            c1            c2            c3
+;     1     2     1 
+;     1     3     1 
+;     4     5     1 
+;     4     6     1 
+
+[ angles ]
+;  ai    aj    ak funct            c0            c1            c2            c3
+;     2     1     3     1 
+;     5     4     6     1 
+
+[ dihedrals ]
+;  i      j      k      l     type2    phiA      kA          phiB      kB
+   3      4      5      6         2    130.12    0.0         130.12    43.93200
+;  i      j      k      l     type1    phiA      kA     n    phiB      kB          n
+;   3      4      5      6         1    130.12    0.0    2    130.12    13.93200    2
+
+;----------------------------------------
+; This section is dedicated to EVB atoms
+;----------------------------------------
+
+[ bonds ]
+; harmonic and Morse bonds
+     1     2    3          0.10        426.76          20.0          0.10        426.76          20.0
+     4     5    3          0.10        426.76          20.0          0.10        426.76          20.0
+     1     3    3          0.10        426.76          20.0          0.10           0.0          20.0
+     4     6    3          0.10        426.76          20.0          0.10        426.76          20.0
+     3     4    3          0.10           0.0          20.0          0.10        426.76          20.0
+; soft-core potential
+     1     3    9    0          0.00    0      18827.97  ; beta = 25.00
+     3     4    9    0      11087.59    0          0.00  ; beta = 25.00
+; constraints
+     1     4       6   0.35   4184.0    
+
+[ angles ]
+     2     1     3    1       109.470       836.799           0.0           0.0
+     5     4     6    1       109.470       836.799       109.500       836.799
+     5     4     3    1           0.0           0.0       109.500       836.799
+     6     4     3    1           0.0           0.0       109.500       836.799
+
+[ exclusions ]
+ 1   3
+ 4   3
+ 2   3
+ 5   3
+ 6   3
+ 1   4
+ 1   5
+ 1   6
+ 4   2
+
+[ pairs ]
+ 1   4    1     0.316560    0.650193    0.328222    0.862553  ;5 -> 5
+ 1   5    1     0.000000    0.000000    0.000000    0.000000  ;5 -> 5
+ 1   6    1     0.000000    0.000000    0.000000    0.000000  ;5 -> 5
+ 4   2    1     0.000000    0.000000    0.287687    0.298797  ;5 -> 5
+
+[ pairs_nb ]
+     1     3  1   -0.653494  1.00   1.00   0.00  ;2 -> 5
+     4     3  1   -0.000000  1.00   1.00   0.00  ;5 -> 2
+     2     3  1    0.111451  1.00   1.00   0.00  ;3 -> 5
+     5     3  1    0.000000  1.00   1.00   0.00  ;5 -> 3
+     6     3  1    0.000000  1.00   1.00   0.00  ;5 -> 3
+     1     4  1    0.377435  1.00   1.00   0.00  ;5 -> 5
+     1     5  1   -0.326747  1.00   1.00   0.00  ;5 -> 5
+     1     6  1   -0.326747  1.00   1.00   0.00  ;5 -> 5
+     4     2  1   -0.064370  1.00   1.00   0.00  ;5 -> 5
+
+; Include Position restraint file
+#ifdef POSRES
+#include "posre.itp"
+#endif
+
+#ifdef POSRES100
+#include "posre100.itp"
+#endif
+
+#ifdef POSRES20
+#include "posre20.itp"
+#endif
+
+#ifdef POSRES2
+#include "posre2.itp"
+#endif
+
+#ifdef POSRES05
+#include "posre05.itp"
+#endif
+
+#ifdef POSRES003
+#include "posre003.itp"
+#endif
+
+; Include water topology
+#include "./h2o_evb.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Other               1
+SOL               669
+

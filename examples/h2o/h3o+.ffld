@@ -1,0 +1,45 @@
+================================================================================
+  ATOMTYPES and PARAMETERS for molecule: 
+
+================================================================================
+
+ Total charge of the system =  0.0000
+Formal charge of the system =  0.0000
+
+
+Charges
+atom  formal fractional formal 
+1       0     0.000  
+2       0     0.000  
+3       0     0.000  
+4       0     0.000  
+
+BCI's             index  type   type    bci        assignement info
+ N1      H2          0   127    240     0.3400   exact type       N3-H
+ N1      H3          0   127    240     0.3400   exact type       N3-H
+ N1      H4          0   127    240     0.3400   exact type       N3-H
+
+OPLSAA FORCE FIELD TYPE ASSIGNED
+-------------------------------------------------------------------------------
+ atom   type  vdw  symbol    charge   sigma    epsilon  quality   comment 
+-------------------------------------------------------------------------------
+ N1      127  N6   N3      -1.0200   3.4200   0.1700 high   Ammonia N
+ H2      240  H5   H        0.3400   0.0000   0.0000 high   Ammonia H
+ H3      240  H5   H        0.3400   0.0000   0.0000 high   Ammonia H
+ H4      240  H5   H        0.3400   0.0000   0.0000 high   Ammonia H
+------------------------------------------------------------------------------
+
+
+ Stretch            k            r0    quality         bt        comment
+ N1      H2      434.00000    1.01000   high         0  => 0     N3-H       ==> N3-H      
+ N1      H3      434.00000    1.01000   high         0  => 0     N3-H       ==> N3-H      
+ N1      H4      434.00000    1.01000   high         0  => 0     N3-H       ==> N3-H      
+
+ Bending                      k       theta0    quality   at  comment
+ H2      N1      H3        35.00000  109.50000   high     0   H-N3-H            ==> H-N3-H           
+ H2      N1      H4        35.00000  109.50000   high     0   H-N3-H            ==> H-N3-H           
+ H3      N1      H4        35.00000  109.50000   high     0   H-N3-H            ==> H-N3-H           
+
+ proper Torsion                     V1      V2      V3      V4    quality  tt  comment
+
+

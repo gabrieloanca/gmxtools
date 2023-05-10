@@ -1,0 +1,36 @@
+; OPLS atom types and masses.
+; Atom types are named opls_X, where X is the OPLS number.
+; The opls_ prefix is to avoid users confusing atom types
+; (always prefixed) with atom numbers in molecules (never prefixed).
+;
+; Types 1-134 are from the united-atom OPLS, which can be
+; useful for solvents and/or CH2 optimizations (e.g. in lipids).
+; Explicit all-atom parameters start with opls_135.
+; Note: For UA amide parameters -
+; NMA - types 1,2,3,4,7,39
+; Formamide 131,2,12,13
+; DMF       131,2,3,132
+; Acetamide 1,2,7,12,13
+;
+; Types 1-65 are united-atom parameters for proteins, 
+; see JACS 110, 1657 (1988).
+;
+ opls_116   15.99940  ; O SPC Water
+ opls_117    1.00800  ; H SPC Water
+; H2O
+ h2o_O1       15.99940
+ h2o_H2        1.00800
+ h2o_H3        1.00800
+; H3O
+ h3o+_O1      15.99940
+ h3o+_H2       1.00800
+ h3o+_H3       1.00800
+ h3o+_H4       1.00800
+ H+            1.00800
+; HO-
+ ho-_O1       15.99940
+ ho-_H2        1.00800
+; dummies
+ h2o_d1       15.99940
+ h2o_d2        1.00800
+ h2o_d3        1.00800

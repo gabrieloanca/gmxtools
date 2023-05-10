@@ -1,0 +1,32 @@
+; Some esoteric OPLS atomtypes are not freely available (or depreciated).
+; Interaction types involving these have been commented out.
+  
+[ bondtypes ]
+; i    j  func       b0          kb
+  OW    HW      1    0.09572   502080.0   ; For TIP4F Water - wlj 1/98
+  h2o_O1      h2o_H2        1     0.10000    418399.5
+  h2o_O1      h2o_H3        1     0.10000    418399.5
+
+
+[ constrainttypes ]
+; this section is implemented manually from bond & angle values
+; account for larger inertia with heavy hydrogens
+
+[ angletypes ]
+;  i    j    k  func       th0       cth
+  HW     OW     HW      1   109.500    627.600   ; For TIP4F Water - wj 1/98
+  h2o_H2      h2o_O1      h2o_H3        1      109.470     836.799
+
+[ dihedraltypes ]
+;  i    j    k    l   func     coefficients
+; OPLS Fourier dihedraltypes translated to Gromacs Ryckaert-Bellemans form
+; according to the formula in the Gromacs manual.
+
+[ dihedraltypes ]
+; Improper OPLS dihedrals to keep groups planar.
+; (OPLS doesnt use impropers for chiral atoms).
+; Since these functions are periodic of the form 1-cos(2*x), they are actually
+; implemented as proper dihedrals [1+cos(2*x+180)] for the moment, 
+; to keep things compatible.
+; The defines are used in ffoplsaa.rtp or directly in your .top file.
+ 

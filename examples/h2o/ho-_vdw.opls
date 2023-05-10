@@ -1,0 +1,4 @@
+;  name        bond_type    Z       mass       charge     ptype      sigma     epsilon
+   ho-_O1      ho-_O1       8   15.99940    -1.205613         A   0.315000    1.045999
+   ho-_H2      ho-_H2       1    1.00800     0.205613         A   0.242000    0.125520
+

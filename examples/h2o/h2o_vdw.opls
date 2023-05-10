@@ -1,0 +1,5 @@
+;  name        bond_type    Z       mass       charge     ptype      sigma     epsilon
+   h2o_O1      h2o_O1       8   15.99940    -0.815258         A   0.316560    0.650193
+   h2o_H2      h2o_H2       1    1.00800     0.407629         A   0.000000    0.000000
+   h2o_H3      h2o_H3       1    1.00800     0.407629         A   0.000000    0.000000
+

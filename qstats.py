@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# Date: Apr 11 2023
-# This script extrats the EVB profiles from qfep output files (Part 3) and calculates the mean and std for dG# and dG0
+# #### Date: Apr 11 2023
+# #### This script extrats the EVB profiles from qfep output files (Part 3) and calculates the mean and std for dG# and dG0
+
+# beer-ware licence
+# oanca.gabriel@gmail.com
+
+# For download and updates, vizit or clone:
+#     https://github.com/gabrieloanca/gmxtools.git
+#     git@github.com:gabrieloanca/gmxtools.git
+# For suggestions, reporting bugs or for any assistance write to oanca.gabriel@gmail.com
+
 
 import sys, os, re
 import statistics as st

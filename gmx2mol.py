@@ -9,8 +9,8 @@
 # oanca.gabriel@gmail.com
 
 # For download and updates, vizit or clone:
-#     https://github.com/gabrieloanca/gromacs-evb
-#     git@github.com:gabrieloanca/gromacs-evb
+#     https://github.com/gabrieloanca/gmxtools.git  
+#     git@github.com:gabrieloanca/gmxtools.git
 # For suggestions, reporting buggs or for any assistance write to oanca.gabriel@gmail.com
 
 

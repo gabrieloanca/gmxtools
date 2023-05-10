@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# Date: Dec 25 2022
-# This scripts extrats dG# and dG0 and std from 'dG_dE.graph' Molaris' mapping generated file
+# #### Date: Dec 25 2022
+# #### This scripts extrats dG# and dG0 and std from 'dG_dE.graph' Molaris' mapping generated file
+
+# beer-ware licence
+# oanca.gabriel@gmail.com
+
+# For download and updates, vizit or clone:
+#     https://github.com/gabrieloanca/gmxtools.git
+#     git@github.com:gabrieloanca/gmxtools.git
+# For suggestions, reporting bugs or for any assistance write to oanca.gabriel@gmail.com
+
 
 import sys, os
 import statistics as st

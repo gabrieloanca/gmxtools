@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Date: Apr 11 2023
+# #### Date: May 18 2023
 # #### This script extrats the EVB profiles from qfep output files (Part 3) and calculates the mean and std for dG# and dG0
 
 # beer-ware licence
@@ -16,7 +16,6 @@
 import sys, os, re
 import statistics as st
 import matplotlib.pyplot as plt
-import numpy as np
 
 def names(fname):
     base = []

@@ -7,12 +7,12 @@ integrator               = md        ; leap-frog integrator
 ;integrator               = sd        ; tcoupl and nsttcoupl are ignores; use tau-t=2;
 ;; ! with 'sd' temp deviations decay twice as fast than Berendsen thermostat with same tau-t
 dt                       = 0.001
-nsteps                   = 50000
+nsteps                   = 100000
 ;
 ;;;LANGEVIN DYNAMICS OPTIONS
 bd-fric                  = 0         ; Brownian dyn friction coess; 0=mass/tau-t
 ld-seed                  = -1        ; gen thermal noise for Brownian dyn; -1=pseudo random
-comm-mode                = none
+comm-mode                = Linear
 ;
 ;;;ENERGY MINIMIZATION OPTIONS
 emtol                    = 10        ; [kJ/mol/nm] conv fc tol

@@ -12,8 +12,8 @@ export GMX_BIN=/home/x_gaboa/bin/gromacs-2022.4/bin/gmx
 
 
 #${GMX_BIN} trjcat -f fep_0??.trr -o all.trr -sort -cat
-echo {20,20} | ${GMX_BIN} trjconv -s equil_11_300k_npt.gro -f all.trr -o all.xtc -pbc nojump -skip 10 -n index.ndx -center
-#echo 0 | ${GMX_BIN} trjconv -s fep_000.gro -f all.trr -o all_wat.xtc -pbc atom -ur compact -skip 10 -n index.ndx
+#echo {20,20} | ${GMX_BIN} trjconv -s equil_11_300k_npt.gro -f all.trr -o all.xtc -pbc nojump -skip 10 -n index.ndx -center
+echo {20,20} | ${GMX_BIN} trjconv -s sysA.tpr -f all.trr -o all.xtc -center -ur compact -pbc mol -skip 10 -n index.ndx
 #rm all.trr
 
 

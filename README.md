@@ -1,4 +1,4 @@
-Python scripts for running EVB simulations Gromacs.
+gmxtools is a series of python scripts for running EVB simulations in gromacs.
 
 For download and updates, vizit or clone:
     https://github.com/gabrieloanca/gmxtools.git
@@ -12,6 +12,8 @@ The following scripts are available:
    gmx2qfep.py     - writes outputs from 'gmx energy' into qfep5_gmx format
    gmx4evb.py      - builds topologies, one for each FEP frame
    qfep5_gmx       - Q5 mapping to extract the EVB profile (fortran code)
-   qstats.py       - perfores statistics on qfep5_gmx output
-   poly_data.py    - smoothen qfep5_gmx generated profiles by a 6th degree polynomial function
+   qstats.py       - extracts the mean and the standard deviation from qfep5_gmx output files
+   poly_data.py    - smoothens qfep5_gmx EVB generated data by a 6th degree polynomial function
+
+To obtain help for any of the above tools, type <tool> -h (e.g., gmx4evb.py -h)
 

@@ -60,6 +60,9 @@ ANALYZE:
 • echo {20,20} | gmx trjconv -s fep_000.gro -f all.trr -o all.xtc -pbc nojump -skip 10 -n index.ndx -center
       where '20' is 'protein'
       with this no atoms jumped over the boundary
+-- To get 'proper centering', use -s with a .tpr file --
+• gmx trjconv -s sysA.tpr -f fep_000.trr -b 0 -e 0 -o start_ii.pdb
+• gmx trjconv -pbc mol -s topol_prod.tpr  -center -ur compact -f traj_prod.xtc -o traj_centered_to_start_pymol.xtc -skip 10
 -----aliases----
 • qfep:  for i in rep_00?; do cp qfep.inp $i; cd $i; qfep5_gmx < qfep.inp > $i.out; cd ../; done
 • cpfep: for i in rep_00?; do cp qfep.inp $i; cd $i; qfep5_gmx < qfep.inp > $i.out; cd ../; done

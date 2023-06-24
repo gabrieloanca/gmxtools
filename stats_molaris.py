@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # #### Date: Dec 25 2022
-# #### This scripts extrats dG# and dG0 and std from 'dG_dE.graph' Molaris' mapping generated file
+# #### This scripts extrats dG# and dG0 from 'dG_dE.graph' of Molaris' mapping file
 
 # beer-ware licence
 # oanca.gabriel@gmail.com

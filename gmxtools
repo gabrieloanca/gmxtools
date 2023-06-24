@@ -7,6 +7,6 @@ gmx2qfep.py
 gmx4evb.py
 qfep5_gmx
 qstats.py
-poly_data.py
+poly.py
 "
 

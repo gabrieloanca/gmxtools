@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Last update: May 10 2023
+# #### Last update: June 24 2023
 # #### It builds topologies, one for each FEP frame, for an EVB simulation with Gromacs.
 
 # beer-ware licence
@@ -21,7 +21,7 @@ from datetime import datetime
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--frames", help="number of FEP windows", required=True, type=int)
-    parser.add_argument("-q", "--qatoms", help="QM atoms file", required=False, default="qatoms.dat")
+    parser.add_argument("-q", "--qmatoms", help="QM atoms file", required=False, default="qmatoms.dat")
     parser.add_argument("-t", "--topology", help="Gromacs generated topology", required=False, default="topol.top")
     parser.add_argument("-r", "--reactants", nargs='*', help="list of reacting moieties", required=True, type=list)
     parser.add_argument("-p", "--products", nargs='*', help="list of products moieties", required=True, type=list)
@@ -33,12 +33,12 @@ def get_args():
     for i in args.products:
         ps.append(''.join(i))
 
-    return args.frames, args.qatoms, args.topology, rs, ps
+    return args.frames, args.qmatoms, args.topology, rs, ps
 
 '''
 def show_help():
     print("""
-gmx4evb.py [-h] -f #frames [-a qatoms.dat] [-t topol.top] [-r reactants] [-p products]
+gmx4evb.py [-h] -f #frames [-a qmatoms.dat] [-t topol.top] [-r reactants] [-p products]
 
 gmx4evb.py reads ffld2gmx.py generated files and generates topology files for an EVB simulation.
 
@@ -49,7 +49,7 @@ with the same name are present in the same state, they must be mentioned that ma
 Options:
  -h or --help                         - show this help and exit
  -f of --frames <int>                 - number of FEP windows
- -q or --qatoms [qatoms.dat]          - a file constaining atom types, charges, soft-core repulsions
+ -q or --qmatoms [qmatoms.dat]          - a file constaining atom types, charges, soft-core repulsions
                                         and some other bonding parameters for the QM atoms.
  -t or --topology [topol.top]         - topology file name
  -r or --reactants <res1 res2 ...>    - the stem names for RS moieties
@@ -270,7 +270,7 @@ def bonds_list(rs, ps, rs_files, ps_files, qpdb, q1, q2, bevb):
     
     check_bonds(bonds, bonds_x2y, rs_bonds, ps_bonds)
     
-    # insert the bonds defined in qatoms.dat. We usually substitute forming/breaking bonds with morse
+    # insert the bonds defined in qmatoms.dat. We usually substitute forming/breaking bonds with morse
     substitute_bevb(bonds, bevb)
     
     return bonds, bonds_x2y
@@ -356,7 +356,7 @@ def angles_list(rs, ps, rs_files, ps_files, qpdb, q1, q2, aevb):
     
     check_angles(angles, angles_x2y, rs_angles, ps_angles)
     
-    # insert angles defined in qatoms.dat
+    # insert angles defined in qmatoms.dat
     substitute_aevb(angles, aevb)
     
     return angles, angles_x2y
@@ -464,7 +464,7 @@ def torsions_list(param, rs, ps, rs_files, ps_files, qpdb, q1, q2, torevb):
 
     check_tor(torsions, rs_torsions, ps_torsions)
     
-    # insert torsions defined in qatoms.dat
+    # insert torsions defined in qmatoms.dat
     substitute_torevb(torsions, torevb)
     
     return torsions
@@ -1650,8 +1650,8 @@ def evb_less(top, name, du):
 
 
 if __name__ == "__main__":
-    feps, qatoms, top, rs, ps = get_args()
-    qpdb, q1, q2, du, charges, soft_at, bevb, bconstr, soft_pairs, aevb, torevb, impevb = read_qm(qatoms, rs, ps)
+    feps, qmatoms, top, rs, ps = get_args()
+    qpdb, q1, q2, du, charges, soft_at, bevb, bconstr, soft_pairs, aevb, torevb, impevb = read_qm(qmatoms, rs, ps)
 
     if rs:
         try:

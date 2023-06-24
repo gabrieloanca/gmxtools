@@ -5,6 +5,8 @@ For download and updates, vizit or clone:
     git@github.com:gabrieloanca/gmxtools.git
 For suggestions, reporting bugs or for any assistance write to oanca.gabriel@gmail.com
 
+For easier use, ddd the path to this folder into your bash rc file.
+
 
 The following scripts are available:
    ffld2gmx.py     - converts ffld parameters to OPLS-AA types fro Gromacs
@@ -15,5 +17,8 @@ The following scripts are available:
    qstats.py       - extracts the mean and the standard deviation from qfep5_gmx output files
    poly_data.py    - smoothens qfep5_gmx EVB generated data by a 6th degree polynomial function
 
-To obtain help for any of the above tools, type <tool> -h (e.g., gmx4evb.py -h)
+
+To show this list in your terminal, type *gmxtools*
+
+To get help for any of these tools, type -h after a tool's name (e.g., gmx4evb.py -h)
 

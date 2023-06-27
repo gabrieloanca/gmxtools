@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Last update: Nov 18 2021
+# #### Last update: June 27 2023
 # #### It writes Gromacs generated data for an EVB job in gap
 # #### files for the mapping tool of Molaris (mapping_hpc9.15).
 
@@ -29,7 +29,7 @@ def get_args():
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             show_help()
-            return 1
+            sys.exit()
         elif opt in ('-f', '--frames'):
             frames = int(arg)
         elif opt in ('-r', '--reactants'):
@@ -232,8 +232,11 @@ if __name__ == "__main__":
     try:
         frames, rs, ps, outdir, skip = get_args()
     except:
-        print('gmx2mol.py -f #frames [-r RS folder] [-p PS folder] [-o output folder] [--skip skip]')
-        print('For help type "gmx2mol.py -h"')
+        if (sys.argv[1:]) and (sys.argv[1:][0] in ('-h', '--help')):
+            pass
+        else:
+            print('gmx2mol.py -f #frames [-r RS folder] [-p PS folder] [-o output folder] [--skip skip]')
+            print('For help type "gmx2mol.py -h"')
         sys.exit()
     
     for i, state in enumerate((rs, ps)):

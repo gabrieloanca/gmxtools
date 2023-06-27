@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Date: May 18 2023
+# #### Date: June 27 2023
 # #### This script extrats the EVB profiles from qfep output files (Part 3) and calculates the mean and std for dG# and dG0
 
 # beer-ware licence
@@ -120,7 +120,6 @@ def savedata(profiles):
             file.write(f"{profiles[key]['x'][i]}\t{profiles[key]['y'][i]:.2f}\n")
         file.close()
 
-
 if __name__ == "__main__":
     try:
         fname = list(sys.argv[1])
@@ -129,6 +128,7 @@ if __name__ == "__main__":
         print('Usage: get_profiles.sh <data_file>')
         print('where "data_file" is any of the EVB data files.')
         print("Requirement: the names of the data files be numbered and must start with an alphabetic character. E.g.: rep0.dat, rep1.dat, etc.")
+        print()
         sys.exit()
 
     base = names(fname)
@@ -154,6 +154,7 @@ if __name__ == "__main__":
         print(f'dG0: {pmean:5.2f}  +/-{pstd:5.2f}')
     except:
         print("\nEVB profiles could not be analyzed.")
+        sys.exit()
 
     name='evb_profile.png'
     savefig(profiles, name)

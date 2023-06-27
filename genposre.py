@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Last update: Dec 8 2022
+# #### Last update: June 27 2023
 # #### It generates position restraints file for Gromacs.
 
 # beer-ware licence
@@ -41,6 +41,7 @@ def get_args():
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             show_help()
+            sys.exit()
         elif opt in ('-q', '--qatoms'):
             qfile = str(arg)
         elif opt in ('-i', '--input'):

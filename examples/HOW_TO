@@ -80,34 +80,6 @@ Extract the coordinates for visualization in VMD
  • It is not always possible to use combinations of -pbc, -fit, -ur and -center to do exactly what you
    want in one call to gmx trjconv. Consider using multiple calls.
 =========================================================================================
-Because the Long-Range cannot be calculated separately for the different groups then modify the
-  fep_000.mdp and fep_050.mdp as follows:
- 
-     ;define          = -DPOSRES003 -DFLEXIBLE (i.e. comment out this line)
-     ;nstlist         = 10      ; use 30 if it runs faster (I don't think it makes any difference)
-     coulombtype      = PME     ; rlist >= rcoulomb
-     coulomb-modifier = None    ; see (*); keep 'none' since will only use Coul(SR)
-     vdw-type         = cut-off ; rlist >= rvdw
-     vdw-modifier     = None    ; same here, since you only use LJ(SR)
-     energygrps       = System-EVB EVB
-     verlet-buffer-tolerance  = -1 ; don't use buffer, but rlist instead
-     rlist            = 2.0    ; it can be even larger that 2.0, since region 1 won't get to see the
-     rcoulomb         = 2.0      enzyme over the pbc; the enzyme may see itself, but that's recorded
-     rvdw             = 2.0      in region2-region2 interaction, which I am not interested in
-     calc-lambda-neighbors = 0  ; it is as useless here as much as in FEP (with my approach)
-
-(*) "With such forces the time integration produces smaller errors... For Coulomb interactions
-     we advise against using a shifted potential and for use of a reaction field or a proper
-     long-range method such as PME."
-     https://manual.gromacs.org/documentation/2019/reference-manual/functions/nonbonded-interactions.html
-
-NOTE:  EVB-nonEVB energies are different with "*-modifier = None" or "Potential-shift", very pronounced
-       for coulomb where the diference is > 2000 kJ/mol. Also Coul(SR) EVB-EVB is ~ 50 kJ/mol different
-
-NOTE:  Ryckaert-Bell potential is the torsion type 3 (that I am using in my topology)
-NOTE:  The long range NB is "*recip." (i.e., reciprocal) potenttial which is shown only when calculating the PME (Coul and LJ).
-       If 'cut-off' is used (for Coul and LJ), then only SR potential will be shown (even though I don't use 'potential-shift).
-
 10. Rerun trajectories on entire system (rerun_protocol.sh    --set your choices inside the file)
 • gmx grompp -f sysA.mdp -c enz-ions.pdb -p topol_000.top -o runA_000_sys.tpr #-maxwarn 1
 • gmx mdrun -s sysA.tpr -rerun fep_000.trr -table table.xvg -tableb table_b0.xvg table_b1.xvg -e fep_000_sysA.edr -g fep_000_sysA.log -o fep_000_sysA.trr -dhdl fep_000_sysA.xvg -nt 16
@@ -148,11 +120,5 @@ to print data in kcal/mol:
 
 • for i in *.top; do sed 's/cym_S1/opls_203/' $i > $i.tmp; done
 • for i in *.tmp; do mv $i `basename $i .tmp`; done
-
-NOTE: When rerunning, increase the cut-off (rlist, rcoulomb and rvdw) such
-      that all interaction with region 1 will fall off into short range.
-NOTE: If I use constraints in MD run, I don't have to put them when rerunning - this way
-      I have all the bonding interactions in order (i.e. 1:Bond, 2:Morse, 3:SC, 4:Angle, and 
-      5:Torsion) - otherwise I have the constraints in between.
 
 

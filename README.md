@@ -7,7 +7,6 @@ For download and updates, vizit or clone:
 For suggestions, reporting bugs or for any assistance write to oanca.gabriel@gmail.com  
 For easier use, add this folder to the **PATH** environment variable in the bash rc file.  
 <br>
-<br>
 The following scripts are available:  
 >**ffld2gmx.py**  - converts ffld parameters to OPLS-AA types for Gromacs  
 >**genposre.py**  - generates posre files with different constraints for region 1 and region 2  

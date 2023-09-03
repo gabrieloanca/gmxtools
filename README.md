@@ -21,6 +21,6 @@ The following scripts are available:
 To show this list in your terminal, type `gmxtools`.<br>
 To get help for any of these tools, type `-h` after a tool's name (e.g., `gmx4evb.py -h`).  
 <br>  
-
+<br>  
 For how to write the qmatoms.dat file, follow the instruction inside examples/HOW_TO_QMATOMS.txt file.
 

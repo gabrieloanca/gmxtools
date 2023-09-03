@@ -108,7 +108,7 @@
    1    1       1000       1000       1000
 #endif
 
-• write qatoms.dat file
+• write qmatoms.dat file
     for GLU164 use atom types from the *.opls files, so gmx4evb.py can change the bondings
 • generate posre*.itp files
     eg: genposre.py -2 20 -1 20

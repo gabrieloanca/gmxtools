@@ -57,7 +57,7 @@ I. PREPARE THE SYSTEM
    Add the residues to aminoacids.rtp and to aminoacids.hdb. For aminoacids.hdb see this tutorial:
    https://distributedscience.wordpress.com/2019/11/10/tutorial-modelling-post-translational-modified-proteins-with-gromacs/
 
-8. Write qatoms.dat file and then build the topologies for all FEP frames: (gmx4evb.ipynb)
+8. Write qmatoms.dat file and then build the topologies for all FEP frames: (gmx4evb.ipynb)
    Build the posre*.ipt files (posre.ipynb)
    Build the soft-core tables (gen_table.f90)
 

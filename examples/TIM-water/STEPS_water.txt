@@ -69,7 +69,7 @@ and for ions as well:
    1    1       1000       1000       1000
 #endif
 
-• write qatoms.dat file
+• write qmatoms.dat file
     gor GLU164, you must build a new residue in aminoacids.rtp where you delete the "-C N" bond,
     otherwise it create a bond between it's own C and N atoms
 

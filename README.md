@@ -2,7 +2,9 @@ gmxtools are a series of python scripts for EVB simulations with GROMACS.
 For download and updates, vizit or clone:  
 >https://github.com/gabrieloanca/gmxtools.git or  
 >git@github.com:gabrieloanca/gmxtools.git  
-  
+
+If you find these tools useful, please cite the following paper:  
+> Gabriel Oanca, Florian van der Ent, Johan Åqvist, Efficient Empirical Valence Bond Simulations with GROMACS, *Journal of Chemical Theory and Computation*, **2023**, doi: 10.1021/acs.jctc.3c00714  
 
 For suggestions, reporting bugs or for any assistance write to oanca.gabriel@gmail.com  
 For easier use, add this folder to the **PATH** environment variable in the bash rc file.  
@@ -16,6 +18,8 @@ The following scripts are available:
 >**qstats.py**    - calculates the mean and the standard deviation from qfep5_gmx output files  
 >**poly_data.py** - smoothens qfep5_gmx EVB generated data with a 6th degree polynomial function  
 <br>
-To show this list in your terminal, type `gmxtools`<br>
-To get help for any of these tools, type `-h` after a tool's name (e.g., `gmx4evb.py -h`)
+To show this list in your terminal, type `gmxtools`.<br>
+To get help for any of these tools, type `-h` after a tool's name (e.g., `gmx4evb.py -h`).  
+
+For how to write the qmatoms.dat file, follow the instruction inside examples/HOW_TO_QMATOMS.txt file.
 

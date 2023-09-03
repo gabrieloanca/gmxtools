@@ -1736,3 +1736,10 @@ if __name__ == "__main__":
         evb_less('topol_000.top', 'evbless.top', du)
     except:
         print('evbless.top file could not be written')
+
+    # show citing paper
+    '''print("""
+If you found this tools useful, please cite the following paper:
+Gabriel Oanca, Florian van der Ent, Johan Åqvist, Efficient Empirical Valence Bond Simulations with GROMACS, Journal of Chemical Theory and Computation, 2023, doi: 10.1021/acs.jctc.3c00714
+""")'''
+

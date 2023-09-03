@@ -3,6 +3,7 @@ gmxtools are a series of python scripts for EVB simulations with gromacs.
 For download and updates, vizit or clone:  
 >https://github.com/gabrieloanca/gmxtools.git or  
 >git@github.com:gabrieloanca/gmxtools.git  
+
 For suggestions, reporting bugs or for any assistance write to oanca.gabriel@gmail.com  
 
 For easier use, add this folder to the PATH environment variable in the bash rc file.  

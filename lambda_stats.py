@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-## Sept 1 2023
-
+## Last update: Sept 1 2023
 ## This script reads QFEP output files and return dG# and dG0 plus STD from lambda profiles (under 'Part 1')
 
 ## Usage: ./qstats_lambda.py <input file>
+
+# beer-ware licence
+# oanca.gabriel@gmail.com
+
+# For download and updates, vizit or clone:
+#     https://github.com/gabrieloanca/gmxtools.git
+#     git@github.com:gabrieloanca/gmxtools.git
+# For suggestions, reporting bugs or for any assistance write to oanca.gabriel@gmail.com
+
 
 import sys, os, re
 import statistics as st

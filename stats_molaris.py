@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Date: Dec 25 2022
+# #### Last_update: Dec 25 2022
 # #### This scripts extrats dG# and dG0 from 'dG_dE.graph' of Molaris' mapping file
 
 # beer-ware licence

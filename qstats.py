@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Date: June 27 2023
+# #### Last update: June 27 2023
 # #### This script extrats the EVB profiles from qfep output files (Part 3) and calculates the mean and std for dG# and dG0
 
 # beer-ware licence

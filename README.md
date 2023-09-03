@@ -1,4 +1,4 @@
-gmxtools are a series of python scripts for EVB simulations with GROMACS.  
+**gmxtools** are a series of python scripts for EVB simulations with GROMACS.  
 For download and updates, vizit or clone:  
 >https://github.com/gabrieloanca/gmxtools.git or  
 >git@github.com:gabrieloanca/gmxtools.git  

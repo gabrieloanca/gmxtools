@@ -6,7 +6,8 @@ For download and updates, vizit or clone:
 If you find these tools useful, please cite the following paper:  
 > Gabriel Oanca, Florian van der Ent, Johan Åqvist, Efficient Empirical Valence Bond Simulations with GROMACS, *Journal of Chemical Theory and Computation*, **2023**, doi: 10.1021/acs.jctc.3c00714  
 
-For suggestions, reporting bugs or for any assistance write to gabriel.oanca@icm.uu.se or to oanca.gabriel@gmail.com  
+For suggestions, reporting bugs or for any assistance write to gabriel.oanca@icm.uu.se or to oanca.gabriel@gmail.com.  
+
 For easier use, add this folder to the **PATH** environment variable in the bash rc file.  
 
 

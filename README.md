@@ -8,7 +8,7 @@ For suggestions, reporting bugs or for any assistance write to oanca.gabriel@gma
 
 For easier use, add this folder to the **PATH** environment variable in the bash rc file.  
 
-<br />    
+<br>  
 The following scripts are available:  
 >**ffld2gmx.py**  - converts ffld parameters to OPLS-AA types for Gromacs  
 >**genposre.py**  - generates posre files with different constraints for region 1 and region 2  
@@ -17,7 +17,7 @@ The following scripts are available:
 >**qfep5_gmx**    - Q5 mapping to extract the EVB profile (fortran code)  
 >**qstats.py**    - calculates the mean and the standard deviation from qfep5_gmx output files  
 >**poly_data.py** - smoothens qfep5_gmx EVB generated data with a 6th degree polynomial function  
-<br />  
+<br>  
   
 To show this list in your terminal, type `gmxtools`  
   

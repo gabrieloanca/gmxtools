@@ -17,7 +17,6 @@ The following scripts are available:
 >**qstats.py**    - calculates the mean and the standard deviation from qfep5_gmx output files  
 >**poly_data.py** - smoothens qfep5_gmx EVB generated data with a 6th degree polynomial function  
 <br>
-<br>
-To show this list in your terminal, type `gmxtools`  
+To show this list in your terminal, type `gmxtools`<br>
 To get help for any of these tools, type `-h` after a tool's name (e.g., `gmx4evb.py -h`)
 

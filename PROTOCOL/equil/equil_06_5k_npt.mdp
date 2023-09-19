@@ -66,17 +66,16 @@ ewald-rtol-lj            = 0.001
 ;;;OPTIONS FOR WEAK COUPLING ALGORITHMS
 ;;;Temperature coupling
 tcoupl                   = v-rescale
-nsttcouple               = 30        ; -1 = nstlist
+nsttcouple               = -1        ; -1 = 10 or less (default)
 tc-grps                  = Protein non-Protein
 tau-t                    = 1 1       ; [ps] ; -1 means no-coupling; use 2 with sd;
 ref-t                    = 5 5       ; [K]
 ;;;Pressure coupling
 ;; Berendsen - best to rescale a box at the beginning of a run
 ;; C-rescale - the box is scaled every nstpcouple steps
-;pcoupl                   = no
-pcoupl                   = C-rescale
+pcoupl                   = C-rescale ; no
 pcoupltype               = isotropic
-nstpcouple               = 1         ; -1 = nstlist
+nstpcouple               = 1         ; -1 = 10 or less (default)
 tau-p                    = 1         ; [ps] time constant for p coupl
 compressibility          = 4.5e-05   ; [bar] water at 300K
 ref-p                    = 1         ; [bar] reference p ; implied by 'pcoupltype'

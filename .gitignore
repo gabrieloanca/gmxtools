@@ -6,5 +6,5 @@ examples/HOW_TO.txt
 examples/TIM-water/NOTES.txt
 examples/TIM-protein/NOTES.txt
 PROTOCOL/fixfile.sh
-
+*.swp
 

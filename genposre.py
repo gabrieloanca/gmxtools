@@ -16,11 +16,11 @@ import sys, getopt
 
 def show_help():
     print('''
-genposre.py [-h] [-q qatoms.dat] [-i posre.itp] [-r1 QM atoms constraints] [-r2 MM atoms constraints] [-o posre<r1><r2>.itp]
+genposre.py [-h] [-q qmatoms.dat] [-i posre.itp] [-r1 QM atoms constraints] [-r2 MM atoms constraints] [-o posre<r1><r2>.itp]
 
 Options:
  -h                                    show this help and exit
- -q or --qatoms   [qatoms.dat]         the file used to give region 1 parameters in gmx4evb.py
+ -q or --qmatoms  [qmatoms.dat]        the same file used to give region 1 parameters in gmx4evb.py
  -i or --input    [posre.itp]          posre.itp file generate by pdb2gmx tool of gromacs
  -o or --output   [posre<r1><r2>.itp]  the newly generated constraints file
  -1 or --r1       [0.5]                the constraining force constant in  kJ/mol/nm2 for atoms in region 1
@@ -30,9 +30,9 @@ Options:
 def get_args():
     arg_list = sys.argv[1:]
     options="hq:i:o:1:2:"
-    long_options=["help","qatoms=","input=","output=","r1","r2"]
+    long_options=["help","qmatoms=","input=","output=","r1","r2"]
     opts, args= getopt.getopt(arg_list, options, long_options)
-    qfile = 'qatoms.dat'
+    qfile = 'qmatoms.dat'
     inp = 'posre.itp'
     out = ''
     c1 = 0.5
@@ -42,7 +42,7 @@ def get_args():
         if opt in ('-h', '--help'):
             show_help()
             sys.exit()
-        elif opt in ('-q', '--qatoms'):
+        elif opt in ('-q', '--qmatoms'):
             qfile = str(arg)
         elif opt in ('-i', '--input'):
             inp = str(arg)
@@ -152,7 +152,7 @@ if __name__ == "__main__":
         if (sys.argv[1:]) and (sys.argv[1:][0] in ('-h', '--help')):
             pass
         else:
-            print('Usage: genposre.py [-q qatoms.dat] [-i posre.itp] [--r1 QM atoms constraints] [--r2 MM atoms constraints] [-o posre<r1><r2>.itp]')
+            print('Usage: genposre.py [-q qmatoms.dat] [-i posre.itp] [--r1 QM atoms constraints] [--r2 MM atoms constraints] [-o posre<r1><r2>.itp]')
             print('For help type "genposre.py -h"')
         sys.exit()
 

@@ -30,7 +30,7 @@ Options:
 def get_args():
     arg_list = sys.argv[1:]
     options="hq:i:o:1:2:"
-    long_options=["help","qmatoms=","input=","output=","r1","r2"]
+    long_options=["help","qmatoms=","input=","output=","r1=","r2="]
     opts, args= getopt.getopt(arg_list, options, long_options)
     qfile = 'qmatoms.dat'
     inp = 'posre.itp'
@@ -94,8 +94,11 @@ def qatoms(qfile):
             at = False
         else:
             if at:
-                r1.append(int(line[0]))
-
+                try:
+                    if (line[6]=='1'):
+                        r1.append(int(line[0]))
+                except:
+                    pass
     return r1
 
 def genposre(inp, r1, con1, con2):
@@ -169,7 +172,7 @@ if __name__ == "__main__":
         sys.exit()
 
     try:
-        write(data, inp, out, c1, c2)
+        write(data, inp, out, c1, c1)
     except:
         print("Output file could not be written")
         sys.exit()

@@ -99,12 +99,12 @@ ________________________________________________________________________________
 =========================================================================================
 =========================================================================================
 SUMMARY:
-   1) evb_trj.sh
+   1) fep_protocol.sh
    2) rerun_protocol.sh using first and last topologies and evbless.top
    4) get_ene.sh
    5) gmx2qfep.py
 
- !!! You can run it more faster, on more machines, using:
+ !!! You can rerun it faster by rerunning each FEP trajectory as a separate job:
     i) gentpr.sh
    ii) runmd_parallel.sh
 =========================================================================================

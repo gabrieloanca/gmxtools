@@ -16,7 +16,7 @@ NOTE: for any other bond type, give the parameters as in GROMACS topology.
 
 • [bcon] directive contains constraints between pairs of atoms. The constraints are gives as bonds of type 6 or 10 which does not generate exclusions. The format is the same as in GROMACS topology.
 
-NOTE: If you want to change any of the angles, torsions and impropers for EVB atoms (passed through the .opls files), you cand do that under the `[angles]`, `[torsions]` or `[impropers]` directives following the same format as in GROMACS topology.
+NOTE: If you want to change any of the angles, torsions and impropers for EVB atoms (passed through the .opls files), you cand do that under the [angles], [torsions] or [impropers] directives following the same format as in GROMACS topology.
 
 • [soft-pairs] directive contain the soft repulsion potential defined for pairs of atoms. Any pair given here will substitute the pair built from data found under [soft-core] directive. The columns are:
 

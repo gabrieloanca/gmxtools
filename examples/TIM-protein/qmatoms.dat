@@ -8,10 +8,7 @@
 [atoms]
 ; #pdb    at(A)        ch(A)       at(B)       ch(B)    dummy  1/2
 ; GLY 164
-2539     guw_C3        0.140      ghw_C3       0.140             2  ; CA
 2541     guw_C5       -0.120      ghw_C5      -0.120             2  ; CB
-2542     guw_H6        0.060      ghw_H6       0.060             2  ; HB1
-2543     guw_H7        0.060      ghw_H7       0.060             2  ; HB2
 2544     guw_C8       -0.220      ghw_C8      -0.120    guw_d8   1  ; CG
 2545     guw_H9        0.060      ghw_H9       0.060    guw_d9   1  ; HG1
 2546     guw_H10       0.060      ghw_H10      0.060    guw_d10  1  ; HG2
@@ -20,10 +17,7 @@
 2549     guw_O13      -0.800      ghw_O13     -0.530    guw_d13  1  ; OE2  !!!
 
 ; SUB 495
-7547     sub_O5       -0.7        sum_O5      -0.7               2  ; O5
 7548     sub_C6       -0.035      sum_C6       0.35              2  ; C6
-7549     sub_H7        0.0875     sum_H7       0.0875            2  ; H7
-7550     sub_H8        0.0875     sum_H8       0.0875            2  ; H8
 7551     sub_C9        0.47       sum_C9       0.2225   sub_d9   1  ; C9
 7552     sub_O10      -0.47       sum_O10     -1.2225   sub_d10  1  ; O10
 7553     sub_C11       0.145      sum_C11      0.1075   sub_d11  1  ; C11  !!!

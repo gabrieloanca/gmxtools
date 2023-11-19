@@ -1,8 +1,8 @@
 ; Mar 07 2023
 ;
-; Last column: '1' is an EVB atom (in region 1); '2' is a non-EVB atom
-; (in region 2). We need to declare the  non-EVB atoms involved in torsion
-; interactions as well as in LJ14 and QQ14 with region 1 atoms in only
+; Last column: '1' is an EVB atom (region 1); '2' is a non-EVB atom
+; (region 2). We need to declare the  non-EVB atoms involved in torsion
+; interactions as well as in LJ14 and Coul14 with region 1 atoms in only
 ; one of the states, due to forming and/or break bonds.
 
 [atoms]
@@ -26,8 +26,7 @@
   29     sub_H14       0.06       sum_H14      0.115    sub_d14  1  ; H14
   30     sub_H15       0.06       ghw_H18      0.450    sub_d15  1  ; H15  !!!
 
-; The A parameter of soft-core potential in gromacs, compared to 
-; molaris, is scales as follows: A(gmx) = A(molaris) / sqrt(0.239006)
+; The A_ij = A_i * A_j; beta_ij = sqrt(beta_i * beta_j)
 [soft-core]
 ;     i        A    beta
      13   221.75    30.0  ; OE2

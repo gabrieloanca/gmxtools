@@ -25,5 +25,7 @@ To show this list in your terminal, type `gmxtools`.
 To get help for any of these tools, type `-h` after a tool's name (e.g., `gmx4evb.py -h`).  
   
   
-For how to write the *qmatoms.dat* file, follow the instruction inside *examples/HOW_TO_QMATOMS* file.  
+For how to write the *qmatoms.dat* file, follow the instruction inside *examples/HOW_TO_QMATOMS* file.
+The file *qmatoms.dat* can also be found inside the *examples/* folder.
 
+A step-by-step guide for an EVB simulation in GROMACS can be found inside *examples/HOW_TO* file as well as in the Supporting Information of the paper above.

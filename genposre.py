@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Last update: June 27 2023
+# #### Last update: Nov. 8 2023
 # #### It generates position restraints file for Gromacs.
 
 # beer-ware licence
@@ -23,8 +23,8 @@ Options:
  -q or --qmatoms  [qmatoms.dat]        the same file used to give region 1 parameters in gmx4evb.py
  -i or --input    [posre.itp]          posre.itp file generate by pdb2gmx tool of gromacs
  -o or --output   [posre<r1><r2>.itp]  the newly generated constraints file
- -1 or --r1       [0.5]                the constraining force constant in  kJ/mol/nm2 for atoms in region 1
- -2 or --r2       [0.0]                the constraining force constant in  kJ/mol/nm2 for atoms in region 2
+ -1 or --r1       [0.5]                the constraining force constant in  kcal/mol/Å^2 for atoms in region 1
+ -2 or --r2       [0.0]                the constraining force constant in  kcal/mol/Å^2 for atoms in region 2
 ''')
 
 def get_args():

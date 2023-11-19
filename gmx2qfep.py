@@ -130,15 +130,15 @@ usage: gmx2qfep.py [-h] -f <#frames> [-r RS folder] [-p PS folder] [-o output fo
 gmx2qfep.py takes the output of an EVB simulation in Gromacs and writes the energies into
 files suited for being analyzed by qfep5_gmx tool. The qfep5_gmx tool is a modified version
 of qfep5 tool of Q(5) software. For info about how to analyze the data with qfep, you can
-still follow the instruction from Q(5) manual (see: http://qdyn.no-ip.org/documents/qman.pdf)
+follow the instruction from Q(5) manual (see: http://qdyn.no-ip.org/documents/qman.pdf)
 
 Options:
- -h    --help           show this help and exit
- -f    --frames         <int> numbers of FEP frames to be analyzed
- -r    --reactants      the folder name containing the files of RS state
- -p    --products       the folder name containing the files of PS state
- -o    --outdir         output folder containing the .gap files
- -s    --skip           <int> collect data every <skip> points
+ -h    --help             show this help and exit
+ -f    --frames    <int>  numbers of FEP frames to be analyzed
+ -r    --reactants [sysA] the folder name containing the files of RS state
+ -p    --products  [sysB] the folder name containing the files of PS state
+ -o    --outdir    [qfep] output folder containing the .gap files
+ -s    --skip      [1]    collect data every <skip> points
 """)
 
 

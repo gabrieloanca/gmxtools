@@ -103,7 +103,6 @@ def get_args():
 def get_feps(state, frames):
     gaps = []
     files = os.listdir(state)
-    hlp = False
     
     for file in files:
         # .+ means more that one unknown character
@@ -213,19 +212,18 @@ def show_help():
     print("""
 usage: gmx2mol.py [-h] -f #frames [-r RS folder] [-p PS folder] [-o output folder] [--skip skip]
 
-gmx2mol.py takes the output of an EVB simulation in Gromacs and adds the energies for each FEP frame
-and at each MD step and puts them into 'gap' files suited for being analyzed by mapping_hpc9.15 tool
-of Molaris software.
+gmx2mol.py takes the output of an EVB simulation in Gromacs and writes the energies for each FEP frame
+into 'gap' files suited for being analyzed by mapping_hpc9.15 tool of Molaris software.
 
 For info about how to analyze data in Molaris, see Molaris manual.
 
 Options:
- -h    --help           show this help and exit
- -f    --frames         <int> numbers of FEP frames to be analyzed
- -r    --reactants      the folder name containing the files of RS state
- -p    --products       the folder name containing the files of PS state
- -o    --outdir         output folder containing the .gap files
- -s    --skip           <int> collect data every 'skip' points
+ -h    --help                show this help and exit
+ -f    --frames    <int>     numbers of FEP frames to be analyzed
+ -r    --reactants [sysA]    the folder name containing the files of RS state
+ -p    --products  [sysB]    the folder name containing the files of PS state
+ -o    --outdir    [gmx2mol] output folder containing the .gap files
+ -s    --skip      [1]       collect data every 'skip' points
 """)
 
 if __name__ == "__main__":

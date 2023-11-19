@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# #### Last update: June 24 2023
+# #### Last update: Nov. 19 2023
 # #### It builds topologies, one for each FEP frame, for an EVB simulation with Gromacs.
 
 # beer-ware licence
@@ -19,12 +19,18 @@ import argparse
 from datetime import datetime
 
 def get_args():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(epilog='''\
+gmx4evb.py reads ffld2gmx.py generated files and generates topology files for an EVB simulation.
+RS and PS residue names should match the prefix of the ffld2gmx.py generated files that correspond to
+the moieties in RS and PS states. More that one residue can be passed to each state. In case when more
+residues with the same name are present in the same state, they must be mentioned that many times.
+''')
     parser.add_argument("-f", "--frames", help="number of FEP windows", required=True, type=int)
-    parser.add_argument("-q", "--qmatoms", help="QM atoms file", required=False, default="qmatoms.dat")
-    parser.add_argument("-t", "--topology", help="Gromacs generated topology", required=False, default="topol.top")
+    parser.add_argument("-q", "--qmatoms", help="QM atoms file constaining atom types, charges, soft-core repulsions\
+                        and some other bonding parameters for the QM atoms (default: qmatoms.dat)", required=False, default="qmatoms.dat")
+    parser.add_argument("-t", "--topology", help="Gromacs generated topology (default: topol.top)", required=False, default="topol.top")
     parser.add_argument("-r", "--reactants", nargs='*', help="list of reacting moieties", required=True, type=list)
-    parser.add_argument("-p", "--products", nargs='*', help="list of products moieties", required=True, type=list)
+    parser.add_argument("-p", "--products", nargs='*', help="list of product moieties", required=True, type=list)
     args = parser.parse_args()
 
     rs , ps = [], []
@@ -35,27 +41,6 @@ def get_args():
 
     return args.frames, args.qmatoms, args.topology, rs, ps
 
-'''
-def show_help():
-    print("""
-gmx4evb.py [-h] -f #frames [-a qmatoms.dat] [-t topol.top] [-r reactants] [-p products]
-
-gmx4evb.py reads ffld2gmx.py generated files and generates topology files for an EVB simulation.
-
-RS and PS residue names should match the prefix of the ffld2gmx.py generated files that correspond to
-the moieties in RS and PS states. More that one residue can be passed to each state. In case more residues
-with the same name are present in the same state, they must be mentioned that many times.
-
-Options:
- -h or --help                         - show this help and exit
- -f of --frames <int>                 - number of FEP windows
- -q or --qmatoms [qmatoms.dat]          - a file constaining atom types, charges, soft-core repulsions
-                                        and some other bonding parameters for the QM atoms.
- -t or --topology [topol.top]         - topology file name
- -r or --reactants <res1 res2 ...>    - the stem names for RS moieties
- -p or --products <res1 res2 ...>     - the stem names for PS moieties
-""")
-'''
 
 def filelist(state, top=''):
     files = {}

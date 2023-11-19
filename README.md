@@ -18,7 +18,7 @@ The following scripts are available:
 >**gmx4evb.py**   - builds topologies, one for each FEP frame  
 >**qfep5_gmx**    - Q5 mapping to extract the EVB profile (fortran code)  
 >**qstats.py**    - calculates the mean and the standard deviation from qfep5_gmx output files  
->**poly_data.py** - smoothens qfep5_gmx EVB generated data with a 6th degree polynomial function  
+>**poly.py**      - smoothens qfep5_gmx EVB generated data with a 6th degree polynomial function  
 
 
 To show this list in your terminal, type `gmxtools`.  

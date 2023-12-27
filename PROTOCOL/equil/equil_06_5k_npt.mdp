@@ -1,6 +1,6 @@
 ;title                    = Proton Transfer
 include                  = -I../
-define                   = -DPOSRES200 -DFLEXIBLE -DPOSRES_NA_200
+define                   = -DPOSRES200 -DFLEXIBLE -DPOSRES_IONS_200
 ;
 ;;;RUN CONTROL PARAMETERS
 integrator               = md        ; leap-frog integrator

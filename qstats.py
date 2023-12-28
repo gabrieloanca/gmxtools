@@ -182,8 +182,6 @@ if __name__ == "__main__":
 
     try:
         tmean, tstd, pmean, pstd, rs_list = stats(profiles)
-        print('4')
-
         print(f'\ndG#: {tmean:5.2f}  +/-{tstd:5.2f}')
         print(f'dG0: {pmean:5.2f}  +/-{pstd:5.2f}')
     except:

@@ -1,6 +1,6 @@
 ;title                    = Proton Transfer
 include                  = -I../
-define                   = -DFLEXIBLE
+;define                   = -DFLEXIBLE
 ;
 ;;;RUN CONTROL PARAMETERS
 integrator               = md        ; leap-frog integrator

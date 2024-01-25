@@ -454,8 +454,8 @@ def torsions_list(param, rs, ps, rs_files, ps_files, qpdb, q1, q2, torevb):
     
     return torsions
 
-### check for the bonds/angles/LJ14 complications in the following transformations (see pictograms)
-### it also checks bonds/angles/14pairs in 3, 4 and 5 atoms rings
+### check for bonds/angles/LJ14 complications in the following transformations (see pictograms)
+### and it also checks for bonds/angles/14pairs in 3, 4 and 5 atoms rings
 #   *--       *--*
 #  /\    ->  /  /
 # *-*       *--*
@@ -614,8 +614,8 @@ def pairs_list(rs, ps, rs_files, ps_files, qpdb, q1, q2):
     
     # remove pairs that may also form bonds or angles in 4 or 5 atoms rings
     def purify(nored, angles):
-        # checks if pair exists in ps_angles or ps_angles      
-        # checking for angles involves already checking over bonds
+        # checks if pair exists in rs_angles or ps_angles      
+        # checking for angles already involves checking over bonds
         pure = []
         for p in nored:
             chk = True
@@ -1724,7 +1724,7 @@ if __name__ == "__main__":
 
     # show citing paper
     '''print("""
-If you found this tools useful, please cite the following paper:
+If you find these tools useful, please cite the following paper:
 Gabriel Oanca, Florian van der Ent, Johan Åqvist, Efficient Empirical Valence Bond Simulations with GROMACS, Journal of Chemical Theory and Computation, 2023, doi: 10.1021/acs.jctc.3c00714
 """)'''
 

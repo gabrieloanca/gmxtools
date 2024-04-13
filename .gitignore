@@ -1,0 +1,9 @@
+\#*
+PROTOCOL/HOW_TO.txt
+.DS_Store
+examples/HOW_TO.txt
+PROTOCOL/fixfile.sh
+*.swp
+qstats_lambda.py
+*.orig
+

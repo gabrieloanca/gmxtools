@@ -1,0 +1,22 @@
+;  atom1       atom2       atom3      func          phi          ka
+   sum_O2      sum_P1      sum_O3        1      114.000    1171.519
+   sum_O2      sum_P1      sum_O4        1      114.000    1171.519
+   sum_O2      sum_P1      sum_O5        1      107.000     836.799
+   sum_O3      sum_P1      sum_O4        1      114.000    1171.519
+   sum_O3      sum_P1      sum_O5        1      107.000     836.799
+   sum_O4      sum_P1      sum_O5        1      107.000     836.799
+   sum_P1      sum_O5      sum_C6        1      112.680     669.439
+   sum_O5      sum_C6      sum_H7        1      109.500     292.880
+   sum_O5      sum_C6      sum_H8        1      109.500     292.880
+   sum_O5      sum_C6      sum_C9        1      110.904     711.279
+   sum_H7      sum_C6      sum_H8        1      107.800     276.144
+   sum_H7      sum_C6      sum_C9        1      110.520     376.560
+   sum_H8      sum_C6      sum_C9        1      110.520     376.560
+   sum_C6      sum_C9      sum_O10       1      112.853     711.279
+   sum_C6      sum_C9      sum_C11       1      122.180     543.919
+   sum_O10     sum_C9      sum_C11       1      137.103     543.919
+   sum_C9      sum_C11     sum_O12       1      121.384     669.439
+   sum_C9      sum_C11     sum_H14       1      120.508     334.720
+   sum_O12     sum_C11     sum_H14       1      109.770     502.079
+   sum_C11     sum_O12     sum_H13       1      107.457     585.759
+

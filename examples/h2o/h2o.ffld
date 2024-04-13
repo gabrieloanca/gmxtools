@@ -1,0 +1,39 @@
+================================================================================
+  ATOMTYPES and PARAMETERS for molecule: 
+
+================================================================================
+
+ Total charge of the system =  0.0000
+Formal charge of the system =  0.0000
+
+
+Charges
+atom  formal fractional formal 
+1       0     0.000  
+2       0     0.000  
+3       0     0.000  
+
+BCI's             index  type   type    bci        assignement info
+ O1      H2          0   133    134     0.4100   exact type       OWS-HWS
+ O1      H3          0   133    134     0.4100   exact type       OWS-HWS
+
+OPLSAA FORCE FIELD TYPE ASSIGNED
+-------------------------------------------------------------------------------
+ atom   type  vdw  symbol    charge   sigma    epsilon  quality   comment 
+-------------------------------------------------------------------------------
+ O1      133  O14  OWS     -0.8200   3.1656   0.1554 high   SPC  
+ H2      134  H5   HWS      0.4100   0.0000   0.0000 high   SPC
+ H3      134  H5   HWS      0.4100   0.0000   0.0000 high   SPC
+------------------------------------------------------------------------------
+
+
+ Stretch            k            r0    quality         bt        comment
+ O1      H2     1000.00000    1.00000   high         0  => 0     OWS-HWS    ==> OWS-HWS   
+ O1      H3     1000.00000    1.00000   high         0  => 0     OWS-HWS    ==> OWS-HWS   
+
+ Bending                      k       theta0    quality   at  comment
+ H2      O1      H3       200.00000  109.47000   high     0   HWS-OWS-HWS       ==> HWS-OWS-HWS      
+
+ proper Torsion                     V1      V2      V3      V4    quality  tt  comment
+
+

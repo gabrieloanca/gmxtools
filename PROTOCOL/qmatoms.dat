@@ -1,0 +1,75 @@
+; Mar 07 2023
+;
+; Last column: '1' is an EVB atom (region 1); '2' is a non-EVB atom
+; (region 2). We need to declare the  non-EVB atoms involved in torsion
+; interactions as well as in LJ14 and Coul14 with region 1 atoms in only
+; one of the states, due to forming and/or break bonds.
+
+[atoms]
+; #pdb    at(A)        ch(A)       at(B)       ch(B)    dummy  1/2
+; GLY 164
+   5     guw_C5       -0.120      ghw_C5      -0.120             2  ; CB
+   8     guw_C8       -0.220      ghw_C8      -0.120    guw_d8   1  ; CG
+   9     guw_H9        0.060      ghw_H9       0.060    guw_d9   1  ; HG1
+  10     guw_H10       0.060      ghw_H10      0.060    guw_d10  1  ; HG2
+  11     guw_C11       0.700      ghw_C11      0.520    guw_d11  1  ; CD
+  12     guw_O12      -0.800      ghw_O12     -0.440    guw_d12  1  ; OE1
+  13     guw_O13      -0.800      ghw_O13     -0.530    guw_d13  1  ; OE2  !!!
+
+; SUB 495
+  21     sub_C6       -0.035      sum_C6       0.35              2  ; C6
+  24     sub_C9        0.47       sum_C9       0.2225   sub_d9   1  ; C9
+  25     sub_O10      -0.47       sum_O10     -1.2225   sub_d10  1  ; O10
+  26     sub_C11       0.145      sum_C11      0.1075   sub_d11  1  ; C11  !!!
+  27     sub_O12      -0.683      sum_O12     -0.6405   sub_d12  1  ; O12
+  28     sub_H13       0.418      sum_H13      0.418    sub_d13  1  ; H13
+  29     sub_H14       0.06       sum_H14      0.115    sub_d14  1  ; H14
+  30     sub_H15       0.06       ghw_H18      0.450    sub_d15  1  ; H15  !!!
+
+; The A_ij = A_i * A_j; beta_ij = sqrt(beta_i * beta_j)
+[soft-core]
+;     i        A    beta
+     13   221.75    30.0  ; OE2
+     11   221.75    30.0  ; CD
+     24   221.75    30.0  ; sub_C9
+     26   380.74    30.0  ; sub_C11
+     27   221.75    30.0  ; sub_O12
+     29    20.92    30.0  ; sub_H14
+     30    20.92    30.0  ; sub_H15
+
+; The bonds from topology will be substituted with these bonds
+; Use only bonds of type 1 or 3.
+[bonds]
+;   i      j type        b(A)          k(A)     beta(A)        b(B)          k(B)     beta(B)
+   13     30    3      0.0945          0.00        15.0      0.0945        460.00        15.0 ; O - H
+   30     26    3      0.1090        410.00        15.0      0.1090          0.00        15.0 ; C - H
+
+; bonds of type 6 and 10 does not generate exclusions
+[bcon]
+; constraints 
+;    i     j    type      b0      k
+;    i     j    type  low(A) up1(A) up2(A)    k(A) low(B)  up1(B) up2(B)    k(B)
+    13    30      10    0.05   0.20   0.30     0.0   0.05    0.20   0.30  4184.0  ; O - H
+    30    26      10    0.05   0.20   0.30  4184.0   0.05    0.20   0.30     0.0  ; C - H
+    13    26      10    0.05   0.30   0.40  4184.0   0.05    0.30   0.40  4184.0  ; O - C
+;    13    26       6    0.35   4184.0
+
+; Angles will be defined as in topology.
+; Define both states if it is a forming or a braking angle
+[angles]
+
+; Torsions will be defined as in topology.
+; Define both states if it is a forming or a braking torsion
+[torsions]
+
+; Impropers will be defined as in topology.
+; Define both states if it is a forming or a braking improper
+[impropers]
+;  i      j      k      l   type(2)    phi(A)   k(A)         phi(B)        k(B)
+
+[soft-pairs]
+;    i     j type(9)     beta          k(A)    beta           k(B)
+    13    30       9     25.0       1108.76    25.0           0.00 ; O - H; forming
+    30    26       9     25.0          0.00    25.0        1046.00 ; C - H; breaking
+    13    26       9     30.0      84429.10    30.0       84429.10 ; donor - acceptor
+

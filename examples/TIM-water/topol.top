@@ -1,0 +1,318 @@
+;
+;	File 'topol.top' was generated
+;	By user: x_gaboa (12631)
+;	On host: berzelius001
+;	At date: Tue Apr  4 13:07:23 2023
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                    :-) GROMACS - gmx pdb2gmx, 2022.4 (-:
+;	
+;	Executable:   /home/x_gaboa/bin/gromacs-2022.4/bin/gmx
+;	Data prefix:  /home/x_gaboa/bin/gromacs-2022.4
+;	Working dir:  /proj/compbiochem/users/x_gaboa/TIM/water/maketop
+;	Command line:
+;	  gmx pdb2gmx -f tim.pdb -o tim-start.pdb -water spce -renum -merge all
+;	Force field was read from current directory or a relative path - path added.
+;
+
+; Include forcefield parameters
+#include "./oplsaa.ff/forcefield.itp"
+
+[ moleculetype ]
+; Name            nrexcl
+Other_chain_A       3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+; residue   1 GUW rtp GUW  q -1.0
+     1     guw_N1      1    GUW      N      1       -0.5    14.0067
+     2     guw_H2      1    GUW      H      1        0.3      1.008
+     3     guw_C3      1    GUW     CA      1       0.14     12.011
+     4     guw_H4      1    GUW     HA      1       0.06      1.008
+     5     guw_C5      1    GUW     CB      2      -0.12     12.011
+     6     guw_H6      1    GUW    HB1      2       0.06      1.008
+     7     guw_H7      1    GUW    HB2      2       0.06      1.008
+     8     guw_C8      1    GUW     CG      3      -0.22     12.011
+     9     guw_H9      1    GUW    HG1      3       0.06      1.008
+    10    guw_H10      1    GUW    HG2      3       0.06      1.008
+    11    guw_C11      1    GUW     CD      3        0.7     12.011
+    12    guw_O12      1    GUW    OE1      3       -0.8    15.9994
+    13    guw_O13      1    GUW    OE2      3       -0.8    15.9994
+    14    guw_C14      1    GUW      C      4        0.5     12.011
+    15    guw_O15      1    GUW      O      4       -0.5    15.9994   ; qtot -1
+; residue   2 SUB rtp SUB  q -2.0
+    16     sub_P1      2    SUB     P1      5       1.92     30.974
+    17     sub_O2      2    SUB     O2      5      -1.12    15.9994
+    18     sub_O3      2    SUB     O3      5      -1.12    15.9994
+    19     sub_O4      2    SUB     O4      5      -1.12    15.9994
+    20     sub_O5      2    SUB     O5      5       -0.7    15.9994
+    21     sub_C6      2    SUB     C6      5     -0.035     12.011
+    22     sub_H7      2    SUB     H7      5     0.0875      1.008
+    23     sub_H8      2    SUB     H8      5     0.0875      1.008
+    24     sub_C9      2    SUB     C9      5       0.47     12.011
+    25    sub_O10      2    SUB    O10      5      -0.47    15.9994
+    26    sub_C11      2    SUB    C11      5      0.145     12.011
+    27    sub_O12      2    SUB    O12      5     -0.683    15.9994
+    28    sub_H13      2    SUB    H13      5      0.418      1.008
+    29    sub_H14      2    SUB    H14      5       0.06      1.008
+    30    sub_H15      2    SUB    H15      5       0.06      1.008   ; qtot -3
+
+[ bonds ]
+;  ai    aj funct            c0            c1            c2            c3
+    1     2     1 
+    1     3     1 
+    3     4     1 
+    3     5     1 
+    3    14     1 
+    5     6     1 
+    5     7     1 
+    5     8     1 
+    8     9     1 
+    8    10     1 
+    8    11     1 
+   11    12     1 
+   11    13     1 
+   14    15     1 
+   16    17     1 
+   16    18     1 
+   16    19     1 
+   16    20     1 
+   20    21     1 
+   21    22     1 
+   21    23     1 
+   21    24     1 
+   24    25     1 
+   24    26     1 
+   26    27     1 
+   26    29     1 
+   26    30     1 
+   27    28     1 
+
+[ pairs ]
+;  ai    aj funct            c0            c1            c2            c3
+    1     6     1 
+    1     7     1 
+    1     8     1 
+    1    15     1 
+    2     4     1 
+    2     5     1 
+    2    14     1 
+    3     9     1 
+    3    10     1 
+    3    11     1 
+    4     6     1 
+    4     7     1 
+    4     8     1 
+    4    15     1 
+    5    12     1 
+    5    13     1 
+    5    15     1 
+    6     9     1 
+    6    10     1 
+    6    11     1 
+    6    14     1 
+    7     9     1 
+    7    10     1 
+    7    11     1 
+    7    14     1 
+    8    14     1 
+    9    12     1 
+    9    13     1 
+   10    12     1 
+   10    13     1 
+   16    22     1 
+   16    23     1 
+   16    24     1 
+   17    21     1 
+   18    21     1 
+   19    21     1 
+   20    25     1 
+   20    26     1 
+   21    27     1 
+   21    29     1 
+   21    30     1 
+   22    25     1 
+   22    26     1 
+   23    25     1 
+   23    26     1 
+   24    28     1 
+   25    27     1 
+   25    29     1 
+   25    30     1 
+   28    29     1 
+   28    30     1 
+
+[ angles ]
+;  ai    aj    ak funct            c0            c1            c2            c3
+    2     1     3     1 
+    1     3     4     1 
+    1     3     5     1 
+    1     3    14     1 
+    4     3     5     1 
+    4     3    14     1 
+    5     3    14     1 
+    3     5     6     1 
+    3     5     7     1 
+    3     5     8     1 
+    6     5     7     1 
+    6     5     8     1 
+    7     5     8     1 
+    5     8     9     1 
+    5     8    10     1 
+    5     8    11     1 
+    9     8    10     1 
+    9     8    11     1 
+   10     8    11     1 
+    8    11    12     1 
+    8    11    13     1 
+   12    11    13     1 
+    3    14    15     1 
+   17    16    18     1 
+   17    16    19     1 
+   17    16    20     1 
+   18    16    19     1 
+   18    16    20     1 
+   19    16    20     1 
+   16    20    21     1 
+   20    21    22     1 
+   20    21    23     1 
+   20    21    24     1 
+   22    21    23     1 
+   22    21    24     1 
+   23    21    24     1 
+   21    24    25     1 
+   21    24    26     1 
+   25    24    26     1 
+   24    26    27     1 
+   24    26    29     1 
+   24    26    30     1 
+   27    26    29     1 
+   27    26    30     1 
+   29    26    30     1 
+   26    27    28     1 
+
+[ dihedrals ]
+;  ai    aj    ak    al funct            c0            c1            c2            c3            c4            c5
+    2     1     3     4     3 
+    2     1     3     5     3 
+    2     1     3    14     3 
+    1     3     5     6     3 
+    1     3     5     7     3 
+    1     3     5     8     3     dih_GLU_chi1_N_C_C_C 
+    4     3     5     6     3 
+    4     3     5     7     3 
+    4     3     5     8     3 
+   14     3     5     6     3 
+   14     3     5     7     3 
+   14     3     5     8     3     dih_GLU_chi1_C_C_C_CO
+    1     3    14    15     3 
+    4     3    14    15     3 
+    5     3    14    15     3 
+    3     5     8     9     3 
+    3     5     8    10     3 
+    3     5     8    11     3 
+    6     5     8     9     3 
+    6     5     8    10     3 
+    6     5     8    11     3 
+    7     5     8     9     3 
+    7     5     8    10     3 
+    7     5     8    11     3 
+    5     8    11    12     3 
+    5     8    11    13     3 
+    9     8    11    12     3 
+    9     8    11    13     3 
+   10     8    11    12     3 
+   10     8    11    13     3 
+   17    16    20    21     3 
+   18    16    20    21     3 
+   19    16    20    21     3 
+   16    20    21    22     3 
+   16    20    21    23     3 
+   16    20    21    24     3 
+   20    21    24    25     3 
+   20    21    24    26     3 
+   22    21    24    25     3 
+   22    21    24    26     3 
+   23    21    24    25     3 
+   23    21    24    26     3 
+   21    24    26    27     3 
+   21    24    26    29     3 
+   21    24    26    30     3 
+   25    24    26    27     3 
+   25    24    26    29     3 
+   25    24    26    30     3 
+   24    26    27    28     3 
+   29    26    27    28     3 
+   30    26    27    28     3 
+
+; Include Position restraint file
+#ifdef POSRES
+#include "posre.itp"
+#endif
+
+#ifdef POSRES200
+#include "posre200.itp"
+#endif
+
+#ifdef POSRES20
+#include "posre20.itp"
+#endif
+
+#ifdef POSRES2
+#include "posre2.itp"
+#endif
+
+#ifdef POSRES05
+#include "posre05.itp"
+#endif
+
+#ifdef POSRES003
+#include "posre003.itp"
+#endif
+
+#ifdef POSRESFEP
+#include "posre_fep.itp"
+#endif
+
+; Include water topology
+#include "./oplsaa.ff/spce.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "./oplsaa.ff/ions.itp"
+
+#ifdef POSRES_NA_200
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1      83679.9076   83679.9076   83679.9076
+#endif
+
+#ifdef POSRES_NA_10
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       4183.9954    4183.9954    4183.9954
+#endif
+
+#ifdef POSRES_NA_2
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Other_chain_A       1
+SOL         829
+NA               3

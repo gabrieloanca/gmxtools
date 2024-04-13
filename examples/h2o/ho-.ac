@@ -1,0 +1,5 @@
+CHARGE     -1.00 ( -1 )
+Formula: H1 O1 
+ATOM      1  O1  MOL     1       0.000   0.000   0.107 -1.205613         o
+ATOM      2  H1  MOL     1       0.000   0.000  -0.855  0.205613        ho
+BOND    1    1    2    9     O1   H1

@@ -1,0 +1,116 @@
+;title                    = Proton Transfer
+include                  = -I../
+define                   = -DFLEXIBLE -DPOSRESFEP
+;
+;;;RUN CONTROL PARAMETERS
+integrator               = md        ; leap-frog integrator
+;integrator               = sd        ; tcoupl and nsttcoupl are ignores; use tau-t=2;
+;; ! with 'sd' temp deviations decay twice as fast than Berendsen thermostat with same tau-t
+dt                       = 0.001
+nsteps                   = 20000
+;
+;;;LANGEVIN DYNAMICS OPTIONS
+bd-fric                  = 0         ; Brownian dyn friction coess; 0=mass/tau-t
+ld-seed                  = -1        ; gen thermal noise for Brownian dyn; -1=pseudo random
+comm-mode                = Linear
+;
+;;;ENERGY MINIMIZATION OPTIONS
+emtol                    = 10        ; [kJ/mol/nm] conv fc tol
+emstep                   = 0.01      ; [nm] init ss
+nstcgsteep               = 1000      ; fq for steepest descent step while doing CG
+nbfgscorr                = 10        ; # correction steps in L-BFGS minim
+;
+;;;OUTPUT CONTROL OPTIONS
+nstxout                  = 10        ; fq to write coord to trr file
+nstvout                  = 0         ; saving velocities
+nstfout                  = 0         ; saving forces
+nstlog                   = 0         ; write en to log file
+nstcalcenergy            = 1         ; fq to calc en
+nstenergy                = 0         ; fq to write en to .edr file
+;
+;;;NEIGHBORSEARCHING PARAMETERS
+cutoff-scheme            = Verlet    ; Verlet - the only option supported in v.2021.2
+nstlist                  = 30        ; fq to update the neighbor list (rlist or buffer)
+pbc                      = xyz       ; if I use coulomb type=PME
+;pbc                      = no        ; does not work with cutoff-scheme=Verlet
+periodic-molecules       = no        ; "yes" if the molecule has to couple with itself
+verlet-buffer-tolerance  = 2e-04     ; [kJ/mol/ps] max err for pair interaction/particle
+;                                      coused by cutoff-scheme=Verlet buffer
+;verlet-buffer-tolerance  = -1        ; don't use buffer, but rlist instead
+rlist                    = 1.0       ; [nm] nb list cut-off. Not used with cutoff-scheme=Verlet
+;
+;;;OPTIONS FOR ELECTROSTATICS AND VDW
+;;;coulomb
+;coulombtype              = cut-off   ; rcoulomb <= rlist
+coulombtype              = PME       ; does not work with pbc=no
+;coulombtype              = Reaction-Field ; rvdw <= rlist
+coulomb-modifier         = None
+rcoulomb-switch          = 0         ; [nm] start switching el pot
+rcoulomb                 = 1.0       ; [nm] el cut-off
+;epsilon-r                = 1         ; relative dielectric
+;epsilon-rf               = 0         ; rel-diel only used with reaction-field (instead of PME)
+;;;vdW
+vdw-type                 = cut-off
+vdw-modifier             = Potential-shift
+rvdw-switch              = 0
+rvdw                     = 1.0
+;DispCorr                 = no
+DispCorr                 = EnerPres  ; long range dispersion corrections for En and Pressure
+;DispCorr                 = Ener      ; long range dispersion corrections for Energy only
+;;;Ewald
+fourierspacing           = 0.12
+pme-order                = 5         ; PME interpolation order; 4=cubic interpolation
+ewald-rtol               = 1e-05
+ewald-rtol-lj            = 0.001
+;
+;;;OPTIONS FOR WEAK COUPLING ALGORITHMS
+;;;Temperature coupling
+tcoupl                   = v-rescale
+nsttcouple               = -1        ; -1 = 10 or less (default)
+tc-grps                  = Protein non-Protein
+tau-t                    = 0.1 0.1   ; [ps] ; -1 means no-coupling; use 2 with sd;
+ref-t                    = 300 300   ; [K]
+;;;Pressure coupling
+;; Berendsen - best to rescale a box at the beginning of a run
+;; C-rescale - the box is scaled every nstpcouple steps
+pcoupl                   = no        ; C-rescale
+pcoupltype               = isotropic
+nstpcouple               = -1        ; -1 = 10 or less (default)
+tau-p                    = 40        ; [ps] time constant for p coupl
+compressibility          = 4.5e-05   ; [bar] water at 300K
+ref-p                    = 1         ; [bar] reference p ; implied by 'pcoupltype'
+;refcoord-scaling         = no        ; does not work with pcoupl and constr to posre.itp
+refcoord-scaling         = all       ; 
+;
+;;;GENERATE VELOCITIES FOR STARTUP RUN
+gen-vel                  = no
+gen-temp                 = 300
+gen-seed                 = 10749     ; -1 = pseudo random seed
+;
+;;;OPTIONS FOR BONDS  - which bonds from topology will be converted to rigid holonomic constr
+continuation             = yes
+constraints              = none      ; none, h-bonds, all-bonds, h-angles, all-angles
+constraint-algorithm     = Lincs     ; should not be used with coupled angle constraints
+;
+;;;ENERGY GROUP EXCLUSIONS
+;energygrp-excl           =
+;
+;;;Free energy variables
+free-energy              = yes       ; no, yes
+init-lambda-state        = 40        ; -1 to run the whole FEP
+fep-lambdas              = 0.00 0.02 0.04 0.06 0.08 0.10 0.12 0.14 0.16 0.18 0.20 0.22 0.24 0.26 0.28 0.30 0.32 0.34 0.36 0.38 0.40 0.42 0.44 0.46 0.48 0.50 0.52 0.54 0.56 0.58 0.60 0.62 0.64 0.66 0.68 0.70 0.72 0.74 0.76 0.78 0.80 0.82 0.84 0.86 0.88 0.90 0.92 0.94 0.96 0.98 1.00
+;; !! runs fep automatically
+;init-lambda              = 0         ; can not set both, init-lambda and init-lambda-state
+;delta-lambda             = 0.1       ; dl/step ??
+;coul-lambdas             =
+;vdw-lambdas              =
+;bonded-lambdas           =
+;restraint-lambdas        =
+;mass-lambdas             =
+;temperature-lambdas      =
+calc-lambda-neighbors    = 1
+couple-intramol          = yes
+dhdl-derivatives         = no        ; defaul is 'yes'
+nstdhdl                  = 10        ; fq for writing dh/dl to dhdl.xvg
+dhdl-print-energy        = no        ; no, total, potential
+;freezegrps              =            ; groups which won't move

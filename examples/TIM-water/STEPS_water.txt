@@ -1,0 +1,88 @@
+• take tim-start.pdb from protein and keep only GLU164, with backbone, and SUM
+• gmx pdb2gmx -f tim.pdb -o tim-start.pdb -water spce -renum -merge all
+• gmx editconf -f tim-start.pdb -o tim-box.pdb -c -d 1.0 -bt octahedron 
+        system size :  0.550  0.844  1.042 (nm)
+        diameter    :  1.229               (nm)
+        center      :  2.319  4.439  1.221 (nm)
+        box vectors :  0.000  0.000  0.000 (nm)
+        box angles  :   0.00   0.00   0.00 (degrees)
+        box volume  :   0.00               (nm^3)
+        shift       : -0.705 -2.155  0.097 (nm)
+    new center      :  1.615  2.283  1.318 (nm)
+    new box vectors :  3.229  3.229  3.229 (nm)
+    new box angles  :  70.53 109.47  70.53 (degrees)
+    new box volume  :  25.92               (nm^3)
+
+    ChatGPT
+       Q: for a small molecules, what is the average distance between them at 1 molar/liter concentration
+       A: ..... 2.73 x 10^-9 meters ......
+• gmx solvate -cp tim-box.pdb -cs spc216.gro -o tim-solv.pdb -p topol.top 
+    Output configuration contains 2526 atoms in 834 residues
+    Volume                 :     25.9252 (nm^3)
+    Density                :     979.405 (g/l)
+    Number of solvent molecules:    832
+• gmx grompp -f restart.mdp -c tim-solv.pdb -p topol.top -o ions.tpr -maxwarn 2
+• gmx genion -s ions.tpr -o tim-ions.pdb -p topol.top -pname NA -nname CL -neutral
+• Add constraints to topol.top:
+
+#ifdef POSRES200
+#include "posre200.itp"
+#endif
+
+#ifdef POSRES20
+#include "posre20.itp"
+#endif
+
+#ifdef POSRES2
+#include "posre2.itp"
+#endif
+
+#ifdef POSRES05
+#include "posre05.itp"
+#endif
+
+#ifdef POSRES003
+#include "posre003.itp"
+#endif
+
+#ifdef POSRESFEP
+#include "posre_fep.itp"
+#endif
+
+and for ions as well:
+
+#ifdef POSRES_NA_200
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1      83679.9076   83679.9076   83679.9076
+#endif
+
+#ifdef POSRES_NA_10
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       4183.9954    4183.9954    4183.9954
+#endif
+
+#ifdef POSRES_NA_2
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+• write qmatoms.dat file
+    gor GLU164, you must build a new residue in aminoacids.rtp where you delete the "-C N" bond,
+    otherwise it create a bond between it's own C and N atoms
+
+    if for GlU164 you use atomtypes from opls FF (like inside protein), then keep the atomtypes from the *.opls
+    files in topology, so gmx4evb.py can change the bondings, at only at the end change them with 'sed'
+• generate posre*.itp files
+    eg: genposre.py -2 20 -1 20
+    to posre2.itp, posre05.itp and posre003.itp, keep the constraints on in Aqvist's fep
+    build posre_fep.itp which has constraints on reg 2 like in Aqvists simulation
+• gmx4evb.py -f 51 -r guw sub -p ghw sum
+• change atom types for GLU164 in all topologies
+    cd topologies
+    for i in *.top; do ./fixtop.sh $i; done
+• create tables for soft-core interactions
+
+

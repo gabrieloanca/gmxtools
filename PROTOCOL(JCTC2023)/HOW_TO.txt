@@ -1,0 +1,70 @@
+RUN PRODUCTION:
+• for j in rep_00?; do cp equil_11_300k_npt.gro $j/; done
+• for j in rep_00?; do cp table* $j/; done
+• for j in rep_00?; do cp topologies/*.top $j/; done
+• for j in rep_00?; do cp -r oplsaa.ff $j/; done
+
+-----submit-----
+• for i in rep_00?; do cp ts_restart.sh $i; done
+• for i in rep_00?; do cd $i/; sbatch ts_restart.sh; sleep 1; cd ../; done
+• for i in rep_00?; do if tail $i/restart.log | grep "Finished mdrun" > /dev/null; then echo "${i} -- OK"; else echo "${i} -- FALSE"; fi 2> /dev/null; done
+• for j in rep_00?; do cp fep_fw.sh $j/; done
+• for j in rep_00?; do cp fep_rev.sh $j/; done
+• for j in rep_00?; do cd $j; sbatch fep_fw.sh; sleep 1; cd ../; done
+• for j in rep_00?; do cd $j; sbatch fep_rev.sh; sleep 1; cd ../; done
+• for i in rep_00?; do if tail $i/fep_000.log | grep "Finished mdrun" > /dev/null; then echo "${i} - rev: OK"; else echo "${i} - rev: FALSE"; fi 2> /dev/null; if tail $i/fep_050.log | grep "Finished mdrun" > /dev/null; then echo "${i} -- fw: OK"; else echo "${i} -- fw: FALSE"; fi 2> /dev/null; done 
+
+RERUN:
+• for i in rep_00?; do cp ${i}/equil_11_300k_npt.gro ${i}/rerun/; done
+• for i in rep_00?; do cp ${i}/topol_000.top ${i}/rerun/; done
+• for i in rep_00?; do cp ${i}/topol_050.top ${i}/rerun/; done
+• for i in rep_00?; do cp ${i}/evbless.top ${i}/rerun/; done
+• for i in rep_00?; do cp ${i}/table* ${i}/rerun/; done
+• for i in rep_00?; do cp -r ${i}/oplsaa.ff ${i}/rerun/; done
+• for i in rep_00?; do cd ${i}/rerun/; mv ../*.trr . ; cd ../../; done
+-----submit !!! submitting all under one slurm submissions runs faster that waiting in the queue !!! ---
+### • for i in rep_00?; do cp gentpr.sh ${i}/rerun/; done
+### • for i in rep_00?; do cd ${i}/rerun/; ./gentpr.sh; cd ../../; done
+### • for i in rep_00?; do cp rerun.sh ${i}/rerun/; done
+### • nohup ./submit_rerun.sh &
+• for i in rep_00?; do cp rerun_A.sh ${i}/rerun/; done
+• for i in rep_00?; do cp rerun_B.sh ${i}/rerun/; done
+• for i in rep_00?; do cp rerun_evbless.sh ${i}/rerun/; done
+• for i in rep_00?; do cd ${i}/rerun/; sbatch rerun_A.sh ; sleep 1; cd ../../; done
+• for i in rep_00?; do cd ${i}/rerun/; sbatch rerun_B.sh ; sleep 1; cd ../../; done
+• for i in rep_00?; do cd ${i}/rerun/; sbatch rerun_evbless.sh ; sleep 1; cd ../../; done
+
+ANALYZE:
+### • for i in rep_00?; do cp check_rerun.sh $i/rerun/; done
+### • for i in rep_00?; do cd $i/rerun/; echo $i; ./check_rerun.sh ${i} ; echo; cd ../../; done | tee check.log
+• for j in rep_00?; do cp check_rerun2.sh $j/rerun/; done
+• for j in rep_00?; do cd $j/rerun/; ./check_rerun2.sh; cd ../../; done
+• for i in rep_00?; do cp get_ene.sh $i/rerun/; cd $i/rerun/; ./get_ene.sh ; cd ../../; done
+• for i in rep_00?; do cd $i/rerun/; echo ${i}; gmx2qfep.py -f 51; cd ../../; done
+• mkdir profiles; for i in rep_00?; do echo ${i}; cp -r ${i}/rerun/qfep profiles/${i}; done
+
+
+===== OTHER COMMANDS =====
+• gmx trjconv -s catb-cubic_wat.pdb -f 1-relax_5k.trr -o 1-relax_5k.xtc -pbc atom -ur compact #-center
+• nvidia-smi --query-gpu=utilization.gpu --format=csv --loop=1
+• find . -name "*.trr" > alltrr
+• cat alltrr | while read i; do rm $i; done
+• plot for [i in system("ls *dat")] i u 2:3 w lp pt 7 tit i
+• rsync -varl berzelius:/proj/compbiochem/users/x_gaboa/PaHBDH/fep_half/ . | tee rsync.log > /dev/null 2>&1
+• nohup all_trr.sh &
+• gmx trjconv -f fep_000.trr -s fep_000.gro -o hbdh.pdb -b 0 -e 0 -ur compact -pbc nojump -center -n index.ndx
+  gmx trjconv -f fep_000.trr -s fep_000.gro -o protein.pdb -b 0 -e 0 -ur compact -pbc whole -center -n index.ndx
+• gmx make_ndx -f fep_000.gro
+      then choose several groups using 'OR', eg: 1 | 13 | 14
+• gmx help <module>
+• echo {20,20} | gmx trjconv -s fep_000.gro -f all.trr -o all.xtc -pbc nojump -skip 10 -n index.ndx -center
+      where '20' is 'protein'
+      with this no atoms jumped over the boundary
+-- To get a "correct" centering for nice graphics, use -s with a .tpr file --
+• gmx trjconv -s sysA.tpr -f fep_000.trr -b 0 -e 0 -o start_ii.pdb # serves as a structure for vmd
+• gmx trjconv -pbc mol -s topol_prod.tpr  -center -ur compact -f traj_prod.xtc -o traj_centered_to_start_pymol.xtc -skip 10
+-----aliases----
+• qfep:  for i in rep_00?; do cp qfep.inp $i; cd $i; qfep5_gmx < qfep.inp > $i.out; cd ../; done
+• cpfep: for i in rep_00?; do cp qfep.inp $i; cd $i; qfep5_gmx < qfep.inp > $i.out; cd ../; done
+• check: for i in rep_00?; do echo -n $i:; if tail $i/fep_050.log | grep "Finished mdrun" > /dev/null; then echo " -- OK"; else echo " -- FALSE"; fi; done
+

@@ -1,0 +1,124 @@
+## A step-by-step guide that runs through calculating the missing parameters, adding
+## them to the Force Field, preparing the topologies and andlyzing the results. 
+
+I. PREPARE THE SYSTEM
+1. gmx pdb2gmx -f enz.pdb -o enz-start.pdb -water spc -inter -merge all #-ignh -renum
+    choose the ionization state for the ionizable residues
+    "-renum" renumbers the residues in consecutive order
+2. gmx editconf -f enz-start.pdb -o enz-box.pdb -c -d 1 -bt dodecahedron
+3. gmx solvate -cp enz-box.pdb -cs spc216.gro -o enz-solv.pdb -p topol.top
+    if you have chrystalographic waters, change their name to SOL 
+--------------
+!!! If you have to add ions, proceed with these steps (for step 4 use any .mdp input file):
+4. gmx grompp -f file.mdp -c enz-solv.pdb -p topol.top -o ions.tpr -maxwarn 1
+    you may get a warning because of the net charge being different that zero
+    you don't get this warning if you use minimization instead of md (integrator=steep)
+5. gmx genion -s ions.tpr -o enz-ions.pdb -p topol.top -pname NA -nname CL -neutral
+    when prompted, choose the group "SOL" for embedding ions
+--------------
+6. Add these constraints at the end of the topology file, just befor the "; Include water topology" line
+
+; Include Position restraint file
+#ifdef POSRES200
+#include "posre200.itp"
+#endif
+
+#ifdef POSRES20
+#include "posre20.itp"
+#endif
+
+#ifdef POSRES2
+#include "posre2.itp"
+#endif
+
+#ifdef POSRES05
+#include "posre05.itp"
+#endif
+
+#ifdef POSRES003
+#include "posre003.itp"
+#endif
+
+#ifdef POSRES00305
+#include "posre00305.itp"
+#endif
+
+7. Extract the antechamber(Amber) RESP charges and the ffld_server(Schrodinger) FF parameters
+   Convert these parameters to Gromacs OPLS-AA FF (ffld2gmx)
+   Add the parameters to ffnonbonding.itp, ffbonded.itp, atomtype.atp
+   Add also the atomtypes for state B into atomtypes.atp and ffnonbonded.itp
+   In ffnonbonded.itp, give to B state atomtypes the same bonding type as for state A
+   (to have bonding parameters between EVB and non-EVB atoms in state B) 
+   Also define in ffnonbonding.itp and atomtypes.atp the dummyes for EVB region 
+   (charge = 0 and vdW = 0), but keeping the bonding type - otherwise gromacs will give you an 
+   error for not finding bonding parameters - the bonding interaction in region 1 will be set to 
+   0.0 in evbless.top.
+
+   Add the residues to aminoacids.rtp and to aminoacids.hdb. For aminoacids.hdb see this tutorial:
+   https://distributedscience.wordpress.com/2019/11/10/tutorial-modelling-post-translational-modified-proteins-with-gromacs/
+
+8. Write qmatoms.dat file and then build the topologies for all FEP frames: (gmx4evb.ipynb)
+   Build the posre*.ipt files (posre.ipynb)
+   Build the soft-core tables (gen_table.f90)
+
+II. RUN MD
+9. Run equilibration (equil_protocol.sh)
+   Run feps (fep_protocol.sh)
+=========================================================================================
+Analyzing FEP
+-------------
+Concatenate the coordinates from FEP (all_trr.sh)
+• gmx trjcat -f fep_0??.trr -o all.trr -sort -cat
+
+Extract the coordinates for visualization in VMD
+• gmx trjconv -s fep_000.gro -f all.trr -o all.xtc -pbc atom -ur compact -skip 20 -center
+     -pbc: atom   - puts all atoms in the box
+           nojump - checks if atoms jump across the box and then puts them back
+                    (all molecules will remain whole, but molecules may diffuse out of the box)
+           whole  - makes broken molecules whole
+ • Use option -pbc mol in addition to -center when you want all molecules in the box after the centering  
+ • It is not always possible to use combinations of -pbc, -fit, -ur and -center to do exactly what you
+   want in one call to gmx trjconv. Consider using multiple calls.
+=========================================================================================
+10. Rerun trajectories on entire system (rerun_protocol.sh    --set your choices inside the file)
+• gmx grompp -f sysA.mdp -c enz-ions.pdb -p topol_000.top -o runA_000_sys.tpr #-maxwarn 1
+• gmx mdrun -s sysA.tpr -rerun fep_000.trr -table table.xvg -tableb table_b0.xvg table_b1.xvg -e fep_000_sysA.edr -g fep_000_sysA.log -o fep_000_sysA.trr -dhdl fep_000_sysA.xvg -nt 16
+
+NOTE: if I don't give -dhdl and -t, then gmx will built then anyway with default file-names
+_________________________________________________________________________________________
+When rerunning, use topol_000.top and topol_050.top for state A and B, respectively.
+Then rerun the system again with evbless.top - a topology where all regions 1 is turned off
+(dummy atoms and k=0.0 for all bonding interactions)
+
+• gmx grompp -f evbless.mdp -c enz-ions.pdb -p evbless.top -o evbless.tpr -maxwarn 1
+• gmx mdrun -s evbless.tpr -rerun fep_000_evbless.trr -table table.xvg -tableb table_b0.xvg table_b1.xvg -e fep_000_evbless.edr -g fep_000_evbless.log -o fep_000_evbless.trr -dhdl fep_000_evbsys.xvg -nt 1
+_________________________________________________________________________________________
+11. Extract the energy (get_ene.sh   --set your choices inside the file)
+12. Sum the energy components and write then in files for qfep5_gmx
+13. Do the mapping with qfep5_gmx tool of Q
+=========================================================================================
+=========================================================================================
+SUMMARY:
+   1) fep_protocol.sh
+   2) rerun_protocol.sh using first and last topologies and evbless.top
+   4) get_ene.sh
+   5) gmx2qfep.py
+
+ !!! You can rerun it faster by rerunning each FEP trajectory as a separate job:
+    i) gentpr.sh
+   ii) runmd_parallel.sh
+=========================================================================================
+=========================================================================================
+
+BONUS:
+• gmx bar -f fep_*.xvg -o -oi -oh  
+    gives you the dg/dl graph, in kT/mol, in 'baring.xvg'
+
+to print data in kcal/mol:
+• plot 'barint.xvg' u 1:(0.593*$2) w lp pt 6 tit "dGdl"
+   where 0.593 = kT at T=300K
+
+• for i in *.top; do sed 's/cym_S1/opls_203/' $i > $i.tmp; done
+• for i in *.tmp; do mv $i `basename $i .tmp`; done
+
+

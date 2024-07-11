@@ -1,0 +1,10 @@
+TITLE     Getting the Right Output Means no Artefacts in Calculating Stuff
+MODEL        1
+ATOM      1  O   H2O     1      17.990  17.550   6.460  1.00  0.00           O
+ATOM      2  H1  H2O     1      18.470  17.920   7.200  1.00  0.00           H
+ATOM      3  H2  H2O     1      18.570  16.850   6.150  1.00  0.00           H
+ATOM      4  O   H2O     2      16.630  17.000  10.190  1.00  0.00           O
+ATOM      5  H1  H2O     2      15.920  17.000  10.830  1.00  0.00           H
+ATOM      6  H2  H2O     2      16.390  17.620   9.510  1.00  0.00           H
+TER
+ENDMDL

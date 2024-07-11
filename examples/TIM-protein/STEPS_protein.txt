@@ -1,0 +1,120 @@
+----- get parameters (these steps are computed in g09/ folder) -----
+• antechamber -fi gout -i glh_esp.log -fo ac -o glh.ac -c resp -nc 0
+• antechamber -fi gout -i glh_esp.log -fo pdb -o glh.pdb -rn GLH
+• ffld_server -version 14 -print_parameters -ipdb glh.pdb > glh.ffld
+• ffld2gmx.py -n glh -f glh.ffld -a glh.ac
+
+• on CSB: ml load qtools/0.7.1_develmp)
+• q_ffld2q.py -o GLH glh.ffld glh.pdb (--ignore_errors)
+• q_rescale.py GLH.lib
+----- prepare FF -----
+• I put SUB and SUM in ffnonbonded.itp adn atomtypes.atp files
+  I used Aqvist's charges (FF charges, very little different than ffld_server charges that I obtained)
+  For GLU, I added only the EVB atoms and only for DUMMY state, whose bonding types are the same from OPLS-AA FF
+    ; dummy GLU - only CG, HG1, HG2, CD, OE1, and OE2 
+    ;  name        bond_type    Z       mass       charge     ptype      sigma     epsilon
+       glu_d8      CT           6   12.01100         0.00         A   0.350000        0.00
+       glu_d9      HC           1    1.00800         0.00         A   0.250000        0.00
+       glu_d10     HC           1    1.00800         0.00         A   0.250000        0.00
+       glu_d11     C_3          6   12.01100         0.00         A   0.375000        0.00
+       glu_d12     O2           8   15.99940         0.00         A   0.296000        0.00
+       glu_d13     O2           8   15.99940         0.00         A   0.296000        0.00
+  for non-dummy GLU, I will use the same residue name and atom types from OPLS-AA FF
+• Added the bonding parameters to ffbonding.itp -- only for SUB (SUM has bonding types of SUB) 
+  for GLU and GLH, the parameters from FF will be used since I'll give the the same atom types as in the FF
+----- prepare the pdb -----
+• took tim.pdb from Aqvist's job. 
+• removed the substrate. Changed CTN (last residue) to ASN and NTA (1'st residue) to ALA
+• changed HATATOM to ATOM (to SOL and TRP168) 
+  changed CD1 to CD to all ILE
+  change O1 to O in ASN248
+• generate hydrogens in Gromacs and ionize all ionizable residues
+      ml load gromacs/2021
+      gmx pdb2gmx -f tim.pdb -o tim-hydro.pdb -water spce -inter -ignh -renum #-merge all
+        choose option '2' for termini (NH2 and COOH)
+• copy back the substrate (SUB) from timtop.pdb from Aqvist's folder
+• change the order of SUB atoms such that it maches your files (It's not necessary, but it helps to track the atoms)
+!!!! The pro-R hydrogen is the one that always get's transferes. Pro-R H is the one which, if substituted by
+     Deuterium and orienting the other H (the pro-S H) away from us, we would obtain O-C-D in clockwise order
+-----topology-----
+• gmx pdb2gmx -f tim_hydro.pdb -o tim-start.pdb -water spce -renum -merge all
+      the terminal residues got chrged, but NH2+ cancels the COO-, so the total charge does not change.
+• gmx editconf -f tim-start.pdb -o tim-box.pdb -c -d 1.2 -bt octahedron
+          system size :  8.240  5.544  6.315 (nm)
+          diameter    :  8.373               (nm)
+          center      :  4.201  4.158  1.298 (nm)
+          box vectors :  0.000  0.000  0.000 (nm)
+          box angles  :   0.00   0.00   0.00 (degrees)
+          box volume  :   0.00               (nm^3)
+          shift       :  1.186  3.460  3.100 (nm)
+      new center      :  5.387  7.618  4.398 (nm)
+      new box vectors : 10.773 10.773 10.773 (nm)
+      new box angles  :  70.53 109.47  70.53 (degrees)
+      new box volume  : 962.57               (nm^3)
+• gmx solvate -cp tim-box.pdb -cs spc216.gro -o tim-solv.pdb -p topol.top
+      Output configuration contains 95484 atoms in 29804 residues
+      Volume                 :     962.623 (nm^3)
+      Density                :     1009.33 (g/l)
+      Number of solvent molecules:  28539
+
+  Changed old water HOH to SOL
+  Correct the number of solvent molecules (last line) in topology
+  Add the following lines to topology:
+
+#ifdef POSRES200
+#include "posre200.itp"
+#endif
+
+#ifdef POSRES20
+#include "posre20.itp"
+#endif
+
+#ifdef POSRES2
+#include "posre2.itp"
+#endif
+
+#ifdef POSRES05
+#include "posre05.itp"
+#endif
+
+#ifdef POSRES003
+#include "posre003.itp"
+#endif
+
+#ifdef POSRESFEP
+#include "posre_fep.itp"
+#endif
+
+• gmx grompp -f restart.mdp -c tim-solv.pdb -p topol.top -o ions.tpr -maxwarn 2
+• gmx genion -s ions.tpr -o tim-ions.pdb -p topol.top -pname NA -nname CL -neutral
+
+  Add constraints for ions to topol.top
+
+#ifdef POSRES_NA_200
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1      83679.9076   83679.9076   83679.9076
+#endif
+
+#ifdef POSRES_NA_10
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       4183.9954    4183.9954    4183.9954
+#endif
+
+#ifdef POSRES_NA_2
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+• write qmatoms.dat file
+    for GLU164 use atom types from the *.opls files, so gmx4evb.py can change the bondings
+• generate posre*.itp files
+    eg: genposre.py -2 20 -1 20
+• gmx4evb.py -f 51 -r guw sub -p ghw sum
+• change atom types for GLU164 in all topologies
+    cd topologies
+    for i in *.top; do ./fixtop.sh $i; done
+
+

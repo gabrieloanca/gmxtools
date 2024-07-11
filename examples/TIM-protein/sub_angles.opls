@@ -1,0 +1,25 @@
+;  atom1       atom2       atom3      func          phi          ka
+   sub_O2      sub_P1      sub_O3        1      114.000    1171.519
+   sub_O2      sub_P1      sub_O4        1      114.000    1171.519
+   sub_O2      sub_P1      sub_O5        1      107.000     836.799
+   sub_O3      sub_P1      sub_O4        1      114.000    1171.519
+   sub_O3      sub_P1      sub_O5        1      107.000     836.799
+   sub_O4      sub_P1      sub_O5        1      107.000     836.799
+   sub_P1      sub_O5      sub_C6        1      112.680     669.439
+   sub_O5      sub_C6      sub_H7        1      109.500     292.880
+   sub_O5      sub_C6      sub_H8        1      109.500     292.880
+   sub_O5      sub_C6      sub_C9        1      108.741     753.119
+   sub_H7      sub_C6      sub_H8        1      107.800     276.144
+   sub_H7      sub_C6      sub_C9        1      109.500     292.880
+   sub_H8      sub_C6      sub_C9        1      109.500     292.880
+   sub_C6      sub_C9      sub_O10       1      120.400     669.439
+   sub_C6      sub_C9      sub_C11       1      116.000     585.759
+   sub_O10     sub_C9      sub_C11       1      120.400     669.439
+   sub_C9      sub_C11     sub_O12       1      109.611     753.119
+   sub_C9      sub_C11     sub_H14       1      109.500     292.880
+   sub_C9      sub_C11     sub_H15       1      109.500     292.880
+   sub_O12     sub_C11     sub_H14       1      109.500     292.880
+   sub_O12     sub_C11     sub_H15       1      109.500     292.880
+   sub_H14     sub_C11     sub_H15       1      107.800     276.144
+   sub_C11     sub_O12     sub_H13       1      108.500     460.239
+

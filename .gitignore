@@ -1,0 +1,15 @@
+\#*
+PROTOCOL/HOW_TO.txt
+.DS_Store
+examples/HOW_TO.txt
+PROTOCOL/fixfile.sh
+*.swp
+qstats_lambda.py
+*.orig
+qfep5_gmx
+gmx2qfep.py
+qstats.py
+qpoly.py
+gmx2mol.py
+stats_molaris.py
+PROTOCOL/equil/run.sh

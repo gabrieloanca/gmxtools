@@ -1,0 +1,12 @@
+TITLE     Getting the Right Output Means no Artefacts in Calculating Stuff
+REMARK    THIS IS A SIMULATION BOX
+CRYST1   30.780   30.780   30.780  60.00  60.00  90.00 P 1           1
+MODEL        1
+ATOM      1  O   H2O     1      23.747  23.312   8.952  1.00  0.00           O
+ATOM      2  H1  H2O     1      24.227  23.682   9.692  1.00  0.00           H
+ATOM      3  H2  H2O     1      24.327  22.612   8.642  1.00  0.00           H
+ATOM      4  O   H2O     2      22.387  22.762  12.682  1.00  0.00           O
+ATOM      5  H1  H2O     2      21.677  22.762  13.322  1.00  0.00           H
+ATOM      6  H2  H2O     2      22.147  23.382  12.002  1.00  0.00           H
+TER
+ENDMDL

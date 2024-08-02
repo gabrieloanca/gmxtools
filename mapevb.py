@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-<<<<<<< HEAD
-## May 8 2024
-=======
 ## June 26 2024
->>>>>>> develop
 
 ## Reads gmx energy output and returns the EVB profile
 ## use it as: mapping.py -i rep_000.dat -a [alpha] -hij [hij] -t [temp]
@@ -303,11 +299,8 @@ def gofx(dg_lambda, free_en, bins, frames, minpts, kT, x, N):
     return dx, g1, g2, gg
 
 
+#checks for minima and maxima
 def thermo(x, y):
-<<<<<<< HEAD
-=======
-    #checks for minima and maxima
->>>>>>> develop
     # [index, x[index], y[index], warning]; 0: no warning, 1: warning
     rs, ps = None, None
     ts = [] # it can hold more than one maxima
@@ -460,38 +453,6 @@ if __name__ == "__main__":
 
     if len(tst) == 0:
         if (rst[-1] == 1) and (pst[-1] == 0):
-<<<<<<< HEAD
-            g1 = g1 - pst[2]
-            g2 = g2 - pst[2]
-            gg = gg - pst[2]
-            print(f"RS state could not be located - try with different EVB parameters.")
-            savefig(dx, gg, out+'_evb', 1) #plot diabatics profiles
-
-        elif (pst[-1] == 1):
-            g1 = g1 - rst[2]
-            g2 = g2 - rst[2]
-            gg = gg - rst[2]
-            print(f"PS state could not be located - try with different EVB parameters.")
-            savefig(dx, gg, out+'_evb', 1) #plot diabatics profiles
-
-    elif len(tst) > 1:
-        g1 = g1 - rst[2]
-        g2 = g2 - rst[2]
-        gg = gg - rst[2]
-        print(f"More that one TS maxima have been located - inspect the EVB profile")
-        savefig(dx, gg, tst, rst, out+'_evb', 2) #plot diabatics profiles
-
-    else:
-        g1 = g1 - rst[2]
-        g2 = g2 - rst[2]
-        gg = gg - rst[2]
-        print(f"TS: {tst[0][2]-rst[2]: >7.2f},   dG0: {pst[2]-rst[2]: >7.2f}")
-        savefig(dx, gg, out+'_evb', 1) #plot diabatics profiles
-        
-    savedata(dx, g1, g2, gg, out+'.dat')
-    # 0: diabatic profile, 1: evb profile, 2: evb profile with several TS
-    savefig(dx, g1, g2, out+'_diabatics', 0) #plot diabatics profiles
-=======
             gg = gg - pst[2]
             g1 = g1 - g1.min() #pst[2]
             g2 = g2 - g1.min() #pst[2]
@@ -528,5 +489,5 @@ if __name__ == "__main__":
     # 0: diabatic profile, 1: evb profile, 2: evb profile with several TS
     if pfig:
         savefig(dx, g1, g2, out+'_diabatics', 0) #plot diabatics profiles
->>>>>>> develop
+        
 

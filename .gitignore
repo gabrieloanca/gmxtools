@@ -9,7 +9,6 @@ qstats_lambda.py
 qfep5_gmx
 gmx2qfep.py
 qstats.py
-qpoly.py
 gmx2mol.py
 stats_molaris.py
 PROTOCOL/equil/run.sh
